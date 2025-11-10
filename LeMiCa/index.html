@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html>
+<meta property='og:title' content="LeMiCa: Lexicographic Minimax Path Caching for Efficient Diffusion-Based Video Generation"/>
+<meta property='og:description' content="LeMiCa: Lexicographic Minimax Path Caching for Efficient Diffusion-Based Video Generation"/>
+<meta property='og:url' content='https://unicomai.github.io/LeMiCa/'/>
+<meta property='og:image:width' content='1200' />
+<meta property='og:image:height' content='663' />
+<meta property="og:type" content='website'/>
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="LeMiCa: Lexicographic Minimax Path Caching for Efficient Diffusion-Based Video Generation">
+  <meta name="keywords" content="LeMiCa, Diffusion Video Generation, Caching, Lexicographic Minimax">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LeMiCa: Lexicographic Minimax Path Caching for Efficient Diffusion-Based Video Generation</title>
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/tab_gallery.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="juxtapose/css/juxtapose.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+  <script src="./static/js/magnifier.js"></script>
+  <link href="https://fonts.cdnfonts.com/css/menlo" rel="stylesheet">
+  <link rel="stylesheet" href="./static/css/image_card_fader.css">
+  <link rel="stylesheet" href="./static/css/image_card_slider.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Patrick+Hand|Google+Sans|Noto+Sans|Castoro|Lato|Open+Sans&effect=shadow-multiple|emboss|3d"> 
+  <link rel="icon" href="./static/images/logv2.png" type="image/x-icon"> 
+  <link rel="shortcut icon" href="./static/images/logv2.png" type="image/x-icon">
+  <script>
+    function copyToClipboard() {
+      var code = document.getElementById("code-snippet").innerText;
+      navigator.clipboard.writeText(code).then(function() {
+        alert('Code copied to clipboard!');
+      }, function(err) {
+        alert('Failed to copy text: ', err);
+      });
+    }
+</script>
+<script>
+    var img = document.getElementById("imageToFullscreen");
+    img.addEventListener("click", () => {
+      if (!document.fullscreenElement) {
+        // 进入全屏
+        img.requestFullscreen().catch(err => {
+          console.error(`无法进入全屏模式: ${err.message}`);
+        });
+      } else {
+        // 退出全屏
+        document.exitFullscreen();
+      }
+    });
+  </script>
+
+  <!--  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script> -->
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+  };
+  </script>
+  <script id="MathJax-script" async 
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+</head>
+
+<body>
+
+  <section class="hero is-small">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+           
+          <img src="./static/images/logv2.png" style="height:150px; margin-bottom: 20px; margin-top: -0px;"></img>
+
+          <h1 class="title is-2 publication-title" style="font-size: 2.12rem">
+                       <!-- <img src="./static/images/logv2.png" style="height:50px; margin-top: -0px;"></img> -->
+                       <span class="lemica"></span>Lexicographic Minimax Path Caching for Efficient Diffusion-Based Video Generation
+          </h1>
+
+          <!-- <br>
+          <br>
+          <br> -->
+
+          <!-- <h1 class="title is-2 publication-title" style="
+            display: flex;
+            align-items: center;
+            font-size: 2.12rem;
+            gap: 12px;
+          ">
+            <img src="./static/images/icon_logv1.png" style="height:80px;"></img>
+            <span style="line-height: 50px;">
+              <span class="lemica"></span>
+              Lexicographic Minimax Path Caching for<br>Efficient Diffusion-Based Video Generation
+            </span>
+          </h1> -->
+          <p class="subtitle is-4" style="margin-top: 0.5rem;">✨ NeurIPS 2025 Spotlight ✨</p>
+    
+
+
+          <div class="is-size-4 publication-authors" style="font-size: 2rem; font-weight: bold;">
+            <span class="author-block">
+              <a href="https://github.com/joelulu" target="_blank">Huanlin Gao</a><sup>1,2</sup><sup>∗</sup>,&nbsp;
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?hl=zh-CN&view_op=list_works&user=gpNOW2UAAAAJ" target="_blank">Ping Chen</a><sup>1,2</sup><sup>∗</sup>,&nbsp;
+            </span>
+            <span class="author-block">
+              <a href="https://github.com/stone002" target="_blank">Fuyuan Shi</a><sup>1,2</sup>,&nbsp;
+            </span>
+            <span class="author-block">
+              <a href="https://github.com/tanchaow" target="_blank">Chao Tan</a><sup>1,2</sup>,&nbsp;
+            </span>
+            <span class="author-block">
+               <a href="https://scholar.google.com/citations?hl=en&user=L4OXOs0AAAAJ" target="_blank">Zhaoxiang Liu</a><sup>1,2</sup>
+            </span>
+            <br>
+            <span class="author-block">
+              <a href="https://github.com/FangGet" target="_blank">Fang Zhao</a><sup>1,2</sup><sup>†</sup>,&nbsp;
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=CFUQLCAAAAAJ&hl=en" target="_blank">Kai Wang</a><sup>1,2</sup>,&nbsp;
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com.hk/citations?user=kCC2oKwAAAAJ&hl=zh-CN&oi=ao" target="_blank">Shiguo Lian</a><sup>1,2</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Data Science & Artificial Intelligence Research Institute, China Unicom,&nbsp;</span>
+            <span class="author-block"><sup>2</sup>Unicom Data Intelligence, China Unicom</span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <!-- <span class="author-block">
+              {gaohl51, chenp181, shify15, tanc10, liux750, zhaof50, wangk115, liansg}@chinaunicom.cn
+            </span>
+            <br> -->
+            <span class="author-block">(* Equal contribution. † Corresponding author.)</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- Code Link -->
+              <span class="link-block">
+                <a href="https://github.com/UnicomAI/LeMiCa" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Paper Link -->
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2511.00090" class="external-link button is-normal is-rounded is-dark" target="_blank"> <!-- 替换为你的论文链接 -->
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <!-- Paper Link -->
+              <!-- <span class="link-block">
+                <a href="https://github.com/UnicomAI/LeMiCa/raw/main/assets/LeMiCa_NeurIPS2025_appendix.pdf" class="external-link button is-normal is-rounded is-dark" target="_blank"> 
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Appendix</span>
+                </a>
+              </span> -->
+
+              <!-- Project Page Link -->
+              <span class="link-block">
+                <a href="https://unicomai.github.io/LeMiCa" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-globe"></i>
+                  </span>
+                  <span>Project Page</span>
+                </a>
+              </span>
+              <!-- Bibtex Link -->
+              <span class="link-block">
+                <a href="#bibtex"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-obp"></i>
+                  </span>
+                  <span>BibTex</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- <section class="hero is-small">
+  <div class="hero-body" style="width: 100%">
+        <div class="carousel-teaser-container">
+          <div class="carousel-teaser carousel-teaser-scroll-left">
+            <img src="./static/images/pic/latt1_part_1.jpg" alt="Image 0">
+            <img src="./static/images/pic/latt1_part_2.jpg" alt="Image 0">            
+            <img src="./static/images/pic/latt2_part_1.jpg" alt="Image 0">
+            <img src="./static/images/pic/latt2_part_2.jpg" alt="Image 0">
+            <img src="./static/images/pic/latt3_part_1.jpg" alt="Image 0">
+            <img src="./static/images/pic/latt3_part_2.jpg" alt="Image 0">
+            <img src="./static/images/pic/cog1_part_1.jpg" alt="Image 0">    
+            <img src="./static/images/pic/cog1_part_2.jpg" alt="Image 0">   
+            <img src="./static/images/pic/cog2_part_1.jpg" alt="Image 0">   
+            <img src="./static/images/pic/cog2_part_2.jpg" alt="Image 0">  
+            <img src="./static/images/pic/cog1_part_3.jpg" alt="Image 0">     
+            <img src="./static/images/pic/cog2_part_3.jpg" alt="Image 0">     
+            <img src="./static/images/pic/ops1_part_1.jpg" alt="Image 0">   
+            <img src="./static/images/pic/ops1_part_2.jpg" alt="Image 0">    
+            <img src="./static/images/pic/ops1_part_3.jpg" alt="Image 0">   
+            <img src="./static/images/pic/ops2_part_1.jpg" alt="Image 0">   
+            <img src="./static/images/pic/ops2_part_2.jpg" alt="Image 0">    
+            <img src="./static/images/pic/ops2_part_3.jpg" alt="Image 0">  
+          </div>
+        </div>
+    </div>
+</section> -->
+
+
+<section class="hero is-small">
+  <div class="hero-body" style="width: 100%; display: flex; align-items: center;">
+    
+    <!-- 左侧标签 -->
+    <!-- <div class="label-column" style="display: flex; flex-direction: column; align-items: flex-start; margin-right: 20px;">
+      <div class="label-item">Original</div>
+      <div class="label-item">TeaCache</div>
+      <div class="label-item">LeMiCa</div>
+    </div> -->
+
+    <!-- 轮播部分 -->
+    <div class="carousel-teaser-container">
+      <div class="carousel-teaser carousel-teaser-scroll-left">
+        <img src="./static/images/pic/latt1_part_1.jpg" alt="Image 0">
+        <img src="./static/images/pic/latt1_part_2.jpg" alt="Image 0">            
+        <img src="./static/images/pic/latt2_part_1.jpg" alt="Image 0">
+        <img src="./static/images/pic/latt2_part_2.jpg" alt="Image 0">
+        <img src="./static/images/pic/latt3_part_1.jpg" alt="Image 0">
+        <img src="./static/images/pic/latt3_part_2.jpg" alt="Image 0">
+        <img src="./static/images/pic/cog1_part_1.jpg" alt="Image 0">    
+        <img src="./static/images/pic/cog1_part_2.jpg" alt="Image 0">   
+        <img src="./static/images/pic/cog2_part_1.jpg" alt="Image 0">   
+        <img src="./static/images/pic/cog2_part_2.jpg" alt="Image 0">  
+        <img src="./static/images/pic/cog1_part_3.jpg" alt="Image 0">     
+        <img src="./static/images/pic/cog2_part_3.jpg" alt="Image 0">     
+        <img src="./static/images/pic/ops1_part_1.jpg" alt="Image 0">   
+        <img src="./static/images/pic/ops1_part_2.jpg" alt="Image 0">    
+        <img src="./static/images/pic/ops1_part_3.jpg" alt="Image 0">   
+        <img src="./static/images/pic/ops2_part_1.jpg" alt="Image 0">   
+        <img src="./static/images/pic/ops2_part_2.jpg" alt="Image 0">    
+        <img src="./static/images/pic/ops2_part_3.jpg" alt="Image 0">  
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 底部标题 -->
+  <div style="text-align: center;">
+    <h2 style="font-size: 1.5em; font-weight: bold; color: #333;">Keyframe Comparison</h2>
+  </div>
+
+</section>
+
+
+
+
+
+
+
+<!-- <section class="hero is-small">
+  <div class="hero-body" style="width: 80%; display: flex; flex-direction: column; align-items: center;">
+
+
+    <div style="width: 100%; display: flex; align-items: stretch;">
+
+
+      <div class="label-column">
+        <div class="label-item">Original</div>
+        <div class="label-item">TeaCache</div>
+        <div class="label-item">LeMiCa</div>
+      </div>
+
+
+      <div class="carousel-teaser-container" style="flex: 1">
+        <div class="carousel-teaser carousel-teaser-scroll-left">
+          <img src="./static/images/pic/latt1_part_1.jpg" alt="Image 0">
+          <img src="./static/images/pic/latt1_part_2.jpg" alt="Image 0">            
+          <img src="./static/images/pic/latt2_part_1.jpg" alt="Image 0">
+          <img src="./static/images/pic/latt2_part_2.jpg" alt="Image 0">
+          <img src="./static/images/pic/latt3_part_1.jpg" alt="Image 0">
+          <img src="./static/images/pic/latt3_part_2.jpg" alt="Image 0">
+          <img src="./static/images/pic/cog1_part_1.jpg" alt="Image 0">    
+          <img src="./static/images/pic/cog1_part_2.jpg" alt="Image 0">   
+          <img src="./static/images/pic/cog2_part_1.jpg" alt="Image 0">   
+          <img src="./static/images/pic/cog2_part_2.jpg" alt="Image 0">  
+          <img src="./static/images/pic/cog1_part_3.jpg" alt="Image 0">     
+          <img src="./static/images/pic/cog2_part_3.jpg" alt="Image 0">     
+          <img src="./static/images/pic/ops1_part_1.jpg" alt="Image 0">   
+          <img src="./static/images/pic/ops1_part_2.jpg" alt="Image 0">    
+          <img src="./static/images/pic/ops1_part_3.jpg" alt="Image 0">   
+          <img src="./static/images/pic/ops2_part_1.jpg" alt="Image 0">   
+          <img src="./static/images/pic/ops2_part_2.jpg" alt="Image 0">    
+          <img src="./static/images/pic/ops2_part_3.jpg" alt="Image 0">  
+        </div>
+      </div>
+    </div>
+
+
+    <div style="margin-top: 20px;">
+      <h2 style="font-size: 1.5em; font-weight: bold; color: #333;">Keyframe Comparison</h2>
+    </div>
+
+  </div>
+</section> -->
+
+
+
+
+
+
+  <!-- Paper Abstract -->
+  <section class="section hero is-light">
+    <div class="hero-body">
+      <div class="container is-max-desktop is-centered has-text-centered">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            We present LeMiCa, a training-free and efficient acceleration framework for diffusion-based video generation. While existing caching strategies primarily focus on reducing local heuristic errors, they often overlook the accumulation of global errors, leading to noticeable content degradation between accelerated and original videos. To address this issue, we formulate cache scheduling as a directed graph with error-weighted edges and introduce a Lexicographic Minimax Path Optimization strategy that explicitly bounds the worst-case path error. This approach substantially improves the consistency of global content and style across generated frames. Extensive experiments on multiple text-to-video benchmarks demonstrate that LeMiCa delivers dual improvements in both inference speed and generation quality. Notably, our method achieves a 2.9× speedup on the Latte model and reaches an LPIPS score of 0.05 on Open-Sora, outperforming prior caching techniques. Importantly, these gains come with minimal perceptual quality degradation, making LeMiCa a robust and generalizable paradigm for accelerating diffusion-based video generation. We believe this approach can serve as a strong foundation for future research on efficient and reliable video synthesis. 
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Abstract -->
+
+  <!-- Teaser Image/Video -->
+  <section class="hero teaser">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+      <br>
+        <!-- 替换为你的 teaser 图路径 -->
+        <!-- <img src="./static/images/1_overview.jpg" alt="LeMiCa Teaser Figure" style="width: 80%;"> -->
+        <div style="text-align: center;">
+          <img src="./static/images/1_overview.jpg" alt="LeMiCa Teaser Figure" style="width: 85%; display: block; margin: 0 auto;">
+        </div>
+        <span style="font-size: 0.8em; width: 100%; display: inline-block;">Figure 1: Comparison between LeMiCa (globally controlled cache) and traditional local greedy cache methods. Top: Schematic of different caching strategies. Bottom: LeMiCa outperforms baselines in consistency and speed.</span>
+      </div>
+    </div>
+  </section>
+  <!-- End Teaser -->
+
+  <!-- Method Section -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">LeMiCa</h2>
+        
+        <!-- <h2 class="title is-4">Motivation: Limitations of Local-Greedy Caching</h2>
+        <div class="content has-text-justified">
+          <p>
+            Existing cache methods rely on local error metrics (e.g., L1 relative distance between adjacent timesteps) and fixed thresholds to decide caching, which suffers from two key limitations:
+          </p>
+          <ol>
+            <li><b>Temporal Heterogeneity Ignorance</b>: Diffusion denoising has varying noise levels and semantic importance across timesteps (early steps shape structure, late steps refine details), making uniform thresholds inaccurate.</li>
+            <li><b>Global Error Accumulation</b>: Local error minimization overlooks long-term error propagation, leading to content inconsistency and quality degradation in final videos.</li>
+          </ol>
+          <div class="content has-text-centered">
+            <img src="./static/images/lemica_motivation.png" style="width: 100%;"><br>
+            <span style="font-size: 0.8em; width: 100%; display: inline-block;">Figure 2: (a) Local vs. Global error—caching at t2 (higher local error) causes lower final error than t1. (b) Segment-wise global error: Early cache segments induce larger downstream errors.</span>
+          </div>
+        </div> -->
+
+        <h2 class="title is-4">Motivation: Limitations of Local-Greedy Caching</h2>
+                <div class="content has-text-justified">
+                    <p>
+                        Existing cache methods rely on local error metrics (e.g., L1 relative distance between adjacent timesteps) and fixed thresholds to decide caching, which suffers from two key limitations:
+                    </p>
+                    <ol>
+                        <li><b>Temporal Heterogeneity Ignorance</b>: Diffusion denoising has varying noise levels and semantic importance across timesteps (early steps shape structure, late steps refine details), making uniform thresholds inaccurate.</li>
+                        <li><b>Global Error Accumulation</b>: Local error minimization overlooks long-term error propagation, leading to content inconsistency and quality degradation in final videos.</li>
+                    </ol>
+                    
+                    <div class="content has-text-centered">
+                        <div class="columns is-centered">
+                            <div class="column is-half">
+                                <img src="./static/images/figure_A.jpg" alt="Local vs Global Error" style="width: 80%;"><br>
+                                <span style="font-size: 0.9em; font-weight: bold;">(a) Local vs. Global Cache Error Control
+                            </div>
+                            <div class="column is-half">
+                                <img src="./static/images/figure_B.jpg" alt="Segment-wise Global Error" style="width: 80%;"><br>
+                                <span style="font-size: 0.9em; font-weight: bold;">(b) Segment-wise Error Trends
+                            </div>
+                        </div>
+                        <span style="font-size: 0.9em; width: 100%; display: inline-block; text-align: justify;">
+                          Figure 2: Rethinking cache reuse in denoising diffusion via error estimation. (a) The traditional Local-Greedy ($L_1^{rel}$) strategy uses fixed thresholds on local output differences between adjacent timesteps to decide when to cache. This assumes uniform temporal sensitivity, which can be misleading&mdash;for instance, caching at $t_2$ yields lower final error than $t_1$, despite $t_1$ seeming smoother locally. This highlights the role of temporal heterogeneity. (b) Our <b>Global Outcome-Aware</b> (segment-wise error) strategy estimates final output error when caching outputs over segments of length $len$, starting from timestep $i$. The plot shows that early caches cause greater error, supporting an outcome-sensitive, trajectory-aware strategy over fixed local heuristics.
+                        </span>
+
+
+
+                    </div>
+                </div>
+
+      <h2 class="title is-4">Implementation</h2>
+        <div class="content has-text-justified">
+          <p>
+            LeMiCa formulates cache scheduling as a global optimization problem on a directed acyclic graph (DAG). 
+            Each node represents a timestep, and each edge (i → j) means full inference is done at i and j while reusing cached results in between. 
+            The goal is to control global error accumulation while reducing computation.
+          </p>
+
+          <p style="text-align:center;">
+            $$L_1^{glob}(i \rightarrow j) = \frac{1}{N} \| x^{cache(i \rightarrow j)}_0 - x^{original}_0 \|_1$$
+          </p>
+
+          <p>
+            Here, \(x^{original}_0\) is the output without caching, and \(x^{cache(i \rightarrow j)}_0\) is the output after reusing intermediate caches. 
+            This metric reflects the real downstream impact of caching rather than local step-wise differences.
+          </p>
+
+          <p>
+            Given a computation budget \(B\), LeMiCa finds a path from the start node \(s\) to the end node \(t\) that minimizes the worst error along the path:
+          </p>
+
+          <p style="text-align:center;">
+            $$\min_{P \in \mathcal{P}^{(B)}_{s \to t}} 
+            \mathrm{LexMax}\big(\mathrm{sort}_{desc}\{w(e) \mid e \in P_{cache}\}\big)$$
+          </p>
+
+          <p>
+            The lexicographic minimax strategy first reduces the largest cache error, then the next largest, ensuring smooth and consistent generation. 
+            This global planning avoids the unstable behavior of local greedy caching and achieves both speedup and fidelity.
+          </p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Method Section -->
+
+<!-- Experiments Section -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Evaluations</h2>
+        
+        <h2 class="title is-4">Quantitative Results</h2>
+          <div class="content has-text-centered" style="margin-top: 20px; margin-bottom: 20px;">
+              <img src="./static/images/table1.png" alt="Qualitative or Ablation Results" style="width: 80%;">
+          </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- =================== 5-Method Video Comparison =================== -->
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-4">Visual Results</h2>
+    <h3 class="title is-5">Open-Sora</h3>
+
+    <!-- 方法表头 -->
+    <!-- <div style="display:grid;grid-template-columns:repeat(5, 1fr);gap:12px;align-items:center;margin:12px 0;">
+      <div style="font-weight:700;text-align:center;">Original 26.54s</div>
+      <div style="font-weight:700;text-align:center;">TeaCache-slow 17.58s</div>
+      <div style="font-weight:700;text-align:center;">LeMiCa-slow <span style="color:#e53935; font-weight:800;">17.43s</span></div>
+      <div style="font-weight:700;text-align:center;">TeaCache-fast 12.63s</div>
+      <div style="font-weight:700;text-align:center;">LeMiCa-fast <span style="color:#e53935; font-weight:800;">10.86s</span></div>
+    </div> -->
+
+
+    <!-- 方法表头 -->
+    <div style="display:grid;grid-template-columns:repeat(5, 1fr);gap:12px;align-items:center;margin:12px 0;">
+
+      <div style="font-weight:700;text-align:center;display:flex;flex-direction:column;align-items:center;">
+        Original
+        <div style="font-size:0.95rem;color:#555;">Latency: <span>26.54s</span></div>
+      </div>
+
+      <div style="font-weight:700;text-align:center;display:flex;flex-direction:column;align-items:center;">
+        TeaCache-slow
+        <div style="font-size:0.95rem;color:#555;">Latency: <span>17.58s</span></div>
+      </div>
+
+      <div style="font-weight:700;text-align:center;display:flex;flex-direction:column;align-items:center;">
+        LeMiCa-slow
+        <div style="font-size:0.95rem;color:#555;">Latency: <span style="color:#e53935;font-weight:600;">17.43s</span></div>
+      </div>
+
+      <div style="font-weight:700;text-align:center;display:flex;flex-direction:column;align-items:center;">
+        TeaCache-fast
+        <div style="font-size:0.95rem;color:#555;">Latency: <span>12.63s</span></div>
+      </div>
+
+      <div style="font-weight:700;text-align:center;display:flex;flex-direction:column;align-items:center;">
+        LeMiCa-fast
+        <div style="font-size:0.95rem;color:#555;">Latency: <span style="color:#e53935;font-weight:600;">10.86s</span></div>
+      </div>
+
+    </div>
+
+    <!-- 视频容器 -->
+    <div id="Open-Sora" style="display:flex;flex-direction:column;gap:2px;"></div>
+  </div>
+</section>
+
+
+<!-- =================== 5-Method Image Comparison (Qwen-Image) =================== -->
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-4">Extension to Text-to-Image</h2>
+    <h3 class="title is-5">Qwen-Image</h3>
+
+    <!-- 方法表头（4列版本） -->
+    <div style="display:grid;grid-template-columns:repeat(4, 1fr);gap:12px;align-items:center;margin:12px 0;">
+
+      <div style="font-weight:700;text-align:center;display:flex;flex-direction:column;align-items:center;">
+        Original
+        <div style="font-size:0.95rem;color:#555;">Latency: <span>31.22s</span></div>
+      </div>
+
+      <div style="font-weight:700;text-align:center;display:flex;flex-direction:column;align-items:center;">
+        LeMiCa (B=25)
+        <div style="font-size:0.95rem;color:#555;">Latency: <span style="color:#e53935;font-weight:600;">17.93s</span></div>
+      </div>
+
+      <div style="font-weight:700;text-align:center;display:flex;flex-direction:column;align-items:center;">
+        LeMiCa (B=17)
+        <div style="font-size:0.95rem;color:#555;">Latency: <span style="color:#e53935;font-weight:600;">13.52s</span></div>
+      </div>
+
+      <div style="font-weight:700;text-align:center;display:flex;flex-direction:column;align-items:center;">
+        LeMiCa (B=10)
+        <div style="font-size:0.95rem;color:#555;">Latency: 
+          <span style="color:#e53935;font-weight:600;">9.84s</span>
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- 图片容器：将下面的 src 改成你的图片路径 -->
+    <div id="Qwen-Image" style="display:flex;flex-direction:column;gap:2px;">
+      <img 
+        src="./static/images/Qwen-Image.jpg" 
+        alt="Qwen-Image visual result" 
+        id="imageToFullscreen"
+        style="width:100%;height:auto;border-radius:6px;display:block;"
+      />
+    </div>
+
+    <br>
+    <br>
+
+    <p style="text-align:center; margin-top: 20px; margin-bottom: 20px; font-size: 1.1rem; font-weight: 500;">
+      Comparison of inference efficiency and visual quality of LeMiCa and other acceleration methods on the Qwen-Image.
+    </p>
+
+    <div style="text-align:center;">
+      <img
+        src="./static/images/qw-tb.jpg"
+        alt="Table comparing LeMiCa with other acceleration methods on Qwen-Image"
+        style="max-width:100%; height:auto;"
+      />
+    </div>
+
+  </div>
+</section>
+
+<script>
+  (function () {
+    function $(sel) { return document.querySelector(sel); }
+
+    function isFullscreen() {
+      return document.fullscreenElement
+        || document.webkitFullscreenElement
+        || document.mozFullScreenElement
+        || document.msFullscreenElement;
+    }
+
+    function enterFullscreen(el) {
+      const rfs = el.requestFullscreen
+        || el.webkitRequestFullscreen
+        || el.mozRequestFullScreen
+        || el.msRequestFullscreen;
+      if (rfs) return rfs.call(el);
+      return Promise.reject(new Error('Fullscreen API not supported'));
+    }
+
+    function exitFullscreen() {
+      const efs = document.exitFullscreen
+        || document.webkitExitFullscreen
+        || document.mozCancelFullScreen
+        || document.msExitFullscreen;
+      if (efs) return efs.call(document);
+      return Promise.resolve();
+    }
+
+    function init() {
+      const container = $('#Qwen-Image');
+      if (!container) return;
+
+      // 用容器全屏，兼容性更好（比直接对 img 全屏稳）
+      container.addEventListener('click', function () {
+        if (!isFullscreen()) {
+          enterFullscreen(container).catch(err => {
+            console.error('进入全屏失败：', err);
+          });
+        } else {
+          exitFullscreen();
+        }
+      });
+
+      // Esc 或系统手势退出后，光标还原
+      document.addEventListener('fullscreenchange', syncCursor);
+      document.addEventListener('webkitfullscreenchange', syncCursor);
+
+      function syncCursor() {
+        container.style.cursor = isFullscreen() ? 'zoom-out' : 'zoom-in';
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
+</script>
+
+<script>
+  const ext = '.mp4';
+  const methods = [
+    { name: 'Original',      base: './static/videos/video_ops/base'  },
+    { name: 'TeaCache-slow', base: './static/videos/video_ops/Teaslow'},
+    { name: 'LeMiCa-slow',   base: './static/videos/video_ops/lex27' },
+    { name: 'TeaCache-fast', base: './static/videos/video_ops/Teafast'},
+    { name: 'LeMiCa-fast',   base: './static/videos/video_ops/lex11' },
+  ];
+
+  const prompts = [
+    "White smoke on a black background. Simply drop it in and change its blending mode to screen or add.-2",
+    "A slow upward pan of a blazing oak fire in an indoor fireplace.-1",
+    "Snow falling over multiple houses and trees in a winter landscape against a night sky. A Christmas festivity and celebration atmosphere.-0",
+    "Summer landscape on a mountain lake.-1",
+    "A close-up of a chameleon slowly changing colors as it moves across different surfaces, showcasing its camouflage abilities.-0",
+  ];
+
+  const container = document.getElementById('Open-Sora');
+  const rows = [];
+
+  // 生成视频行
+  prompts.forEach(promptText => {
+    const row = document.createElement('div');
+    row.style.display = 'grid';
+    row.style.gridTemplateColumns = 'repeat(5, 1fr)';
+    row.style.columnGap = '2px';
+    row.style.alignItems = 'center';
+
+    const vids = [];
+    methods.forEach(m => {
+      const video = document.createElement('video');
+      video.muted = true;
+      video.loop = true;
+      video.autoplay = true;
+      video.playsInline = true;
+      video.preload = 'auto';
+      video.controls = true;
+      video.style.width = '100%';
+      video.style.border = '1px solid #ddd';
+      video.style.borderRadius = '6px';
+
+      const src = document.createElement('source');
+      src.src = encodeURI(`${m.base}/${promptText}${ext}`);
+      src.type = 'video/mp4';
+      video.appendChild(src);
+      row.appendChild(video);
+      vids.push(video);
+    });
+    rows.push(vids);
+    container.appendChild(row);
+  });
+
+  // 工具函数
+  const waitReady = v => new Promise(r => {
+    if (v.readyState >= 2) r();
+    else v.addEventListener('loadeddata', r, { once: true });
+  });
+
+  // 同步逻辑
+  async function syncRow(vids) {
+    await Promise.all(vids.map(waitReady));
+    vids.forEach(v => v.currentTime = 0);
+
+    const master = vids[0];
+    const slaves = vids.slice(1);
+
+    // 启动播放
+    vids.forEach(v => v.play().catch(()=>{}));
+
+    // 定期纠偏
+    const HARD = 0.08; // 秒
+    const SOFT = 0.05;
+    const DELTA = 0.04;
+
+    function tune(slave, diff) {
+      if (Math.abs(diff) < SOFT) {
+        slave.playbackRate = diff > 0 ? 1 - DELTA : 1 + DELTA;
+      } else {
+        slave.currentTime = master.currentTime;
+        slave.playbackRate = 1;
+      }
+    }
+
+    function loop() {
+      const t = master.currentTime;
+      slaves.forEach(s => tune(s, s.currentTime - t));
+      requestAnimationFrame(loop);
+    }
+    requestAnimationFrame(loop);
+  }
+
+  // 每行建立同步
+  window.addEventListener('load', () => {
+    rows.forEach(r => syncRow(r));
+  });
+</script>
+
+
+
+<!-- <section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title"><a id="bibtex">BibTeX</a></h2>
+    <pre><code>@misc{liu2024timestep,
+      title={Timestep Embedding Tells: It's Time to Cache for Video Diffusion Model},
+      author={Feng Liu and Shiwei Zhang and Xiaofeng Wang and Yujie Wei and Haonan Qiu and Yuzhong Zhao and Yingya Zhang and Qixiang Ye and Fang Wan},
+      year={2024},
+      eprint={2411.19108},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2411.19108},
+}</code></pre>
+  </div>
+</section> -->
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title"><a id="bibtex">BibTeX</a></h2>
+    <pre>
+    <code id="code-snippet">
+  @inproceedings{gao2025lemica,
+    title     = {LeMiCa: Lexicographic Minimax Path Caching for Efficient Diffusion-Based Video Generation},
+    author    = {Huanlin Gao and Ping Chen and Fuyuan Shi and Chao Tan and Zhaoxiang Liu and Fang Zhao and Kai Wang and Shiguo Lian},
+    journal = {Advances in Neural Information Processing Systems (NeurIPS)},
+    year      = {2025},
+    url       = {https://arxiv.org/abs/2511.00090}
+  }
+  </code></pre>
+  </div>
+</section>
