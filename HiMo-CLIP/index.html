@@ -11,7 +11,7 @@
   <meta name="description" content="LeMiCa: Lexicographic Minimax Path Caching for Efficient Diffusion-Based Video Generation">
   <meta name="keywords" content="LeMiCa, Diffusion Video Generation, Caching, Lexicographic Minimax">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>LeMiCa: Lexicographic Minimax Path Caching for Efficient Diffusion-Based Video Generation</title>
+  <title>HiMo-CLIP: Modeling Semantic Hierarchy and Monotonicity in Vision-Language Alignment</title>
 
   <link rel="stylesheet" href="./static/css/bulma.min.css">
   <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
@@ -32,8 +32,8 @@
   <link rel="stylesheet" href="./static/css/image_card_fader.css">
   <link rel="stylesheet" href="./static/css/image_card_slider.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Patrick+Hand|Google+Sans|Noto+Sans|Castoro|Lato|Open+Sans&effect=shadow-multiple|emboss|3d"> 
-  <link rel="icon" href="./static/images/logv2.png" type="image/x-icon"> 
-  <link rel="shortcut icon" href="./static/images/logv2.png" type="image/x-icon">
+  <link rel="icon" href="./static/images/logo.png" type="image/x-icon"> 
+  <link rel="shortcut icon" href="./static/images/logo.png" type="image/x-icon">
   <script>
     function copyToClipboard() {
       var code = document.getElementById("code-snippet").innerText;
@@ -84,51 +84,39 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-           
-          <img src="./static/images/logv2.png" style="height:150px; margin-bottom: 20px; margin-top: -0px;"></img>
-
+          <br/>
+          <br/>
           <h1 class="title is-2 publication-title" style="font-size: 2.12rem">
-                       <!-- <img src="./static/images/logv2.png" style="height:50px; margin-top: -0px;"></img> -->
-                       <span class="lemica"></span>Lexicographic Minimax Path Caching for Efficient Diffusion-Based Video Generation
+                       <img src="./static/images/logo.png" style="height:50px; margin-bottom: -10px;"></img>
+                       <span class="lemica">HiMo-CLIP: </span>Modeling Semantic Hierarchy and Monotonicity in Vision-Language Alignment
           </h1>
-
-          <!-- <br>
-          <br>
-          <br> -->
-
-          <!-- <h1 class="title is-2 publication-title" style="
-            display: flex;
-            align-items: center;
-            font-size: 2.12rem;
-            gap: 12px;
-          ">
-            <img src="./static/images/icon_logv1.png" style="height:80px;"></img>
-            <span style="line-height: 50px;">
-              <span class="lemica"></span>
-              Lexicographic Minimax Path Caching for<br>Efficient Diffusion-Based Video Generation
-            </span>
-          </h1> -->
-          <p class="subtitle is-4" style="margin-top: 0.5rem;">✨ NeurIPS 2025 Spotlight ✨</p>
+          <p class="subtitle is-4" style="margin-top: 0.5rem;">✨ AAAI 2026 Oral ✨</p>
     
-
-
           <div class="is-size-4 publication-authors" style="font-size: 2rem; font-weight: bold;">
             <span class="author-block">
-              <a href="https://github.com/joelulu" target="_blank">Huanlin Gao</a><sup>1,2</sup><sup>∗</sup>,&nbsp;
+              <a href="" target="_blank">Ruijia Wu</a><sup>1,2</sup><sup>∗</sup>,&nbsp;
             </span>
             <span class="author-block">
               <a href="https://scholar.google.com/citations?hl=zh-CN&view_op=list_works&user=gpNOW2UAAAAJ" target="_blank">Ping Chen</a><sup>1,2</sup><sup>∗</sup>,&nbsp;
             </span>
             <span class="author-block">
-              <a href="https://github.com/stone002" target="_blank">Fuyuan Shi</a><sup>1,2</sup>,&nbsp;
+              <a href="https://scholar.google.com.hk/citations?user=wqvr28MAAAAJ&hl=zh-TW" target="_blank">Fei Shen</a><sup>3</sup>,&nbsp;
             </span>
             <span class="author-block">
-              <a href="https://github.com/tanchaow" target="_blank">Chao Tan</a><sup>1,2</sup>,&nbsp;
+              Shaoan Zhao<sup>1,2</sup>,&nbsp;
+            </span>
+            <span class="author-block">
+               Qiang Hui<sup>1,2</sup>,&nbsp;
+            </span>
+            <span class="author-block">
+              <a href="https://github.com/joelulu" target="_blank">Huanlin Gao</a><sup>1,2</sup>,&nbsp;
+            </span>
+            <span class="author-block">
+              Ting Lu<sup>1,2</sup>,&nbsp;
             </span>
             <span class="author-block">
                <a href="https://scholar.google.com/citations?hl=en&user=L4OXOs0AAAAJ" target="_blank">Zhaoxiang Liu</a><sup>1,2</sup>
             </span>
-            <br>
             <span class="author-block">
               <a href="https://github.com/FangGet" target="_blank">Fang Zhao</a><sup>1,2</sup><sup>†</sup>,&nbsp;
             </span>
@@ -136,20 +124,17 @@
               <a href="https://scholar.google.com/citations?user=CFUQLCAAAAAJ&hl=en" target="_blank">Kai Wang</a><sup>1,2</sup>,&nbsp;
             </span>
             <span class="author-block">
-              <a href="https://scholar.google.com.hk/citations?user=kCC2oKwAAAAJ&hl=zh-CN&oi=ao" target="_blank">Shiguo Lian</a><sup>1,2</sup>
+              <a href="https://scholar.google.com.hk/citations?user=kCC2oKwAAAAJ&hl=zh-CN&oi=ao" target="_blank">Shiguo Lian</a><sup>1,2</sup><sup>†</sup>
             </span>
           </div>
 
           <div class="is-size-5 publication-authors">
             <span class="author-block"><sup>1</sup>Data Science & Artificial Intelligence Research Institute, China Unicom,&nbsp;</span>
             <span class="author-block"><sup>2</sup>Unicom Data Intelligence, China Unicom</span>
+            <span class="author-block"><sup>3</sup>National University of Singapore</span>
           </div>
 
           <div class="is-size-5 publication-authors">
-            <!-- <span class="author-block">
-              {gaohl51, chenp181, shify15, tanc10, liux750, zhaof50, wangk115, liansg}@chinaunicom.cn
-            </span>
-            <br> -->
             <span class="author-block">(* Equal contribution. † Corresponding author.)</span>
           </div>
 
@@ -157,7 +142,7 @@
             <div class="publication-links">
               <!-- Code Link -->
               <span class="link-block">
-                <a href="https://github.com/UnicomAI/LeMiCa" target="_blank"
+                <a href="https://github.com/UnicomAI/HiMo-CLIP" target="_blank"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fab fa-github"></i>
@@ -167,26 +152,40 @@
               </span>
               <!-- Paper Link -->
               <span class="link-block">
-                <a href="https://arxiv.org/abs/2511.00090" class="external-link button is-normal is-rounded is-dark" target="_blank"> <!-- 替换为你的论文链接 -->
+                <a href="" class="external-link button is-normal is-rounded is-dark" target="_blank"> <!-- 替换为你的论文链接 -->
                   <span class="icon">
                       <i class="fas fa-file-pdf"></i>
                   </span>
                   <span>Paper</span>
                 </a>
               </span>
-              <!-- Paper Link -->
-              <!-- <span class="link-block">
-                <a href="https://github.com/UnicomAI/LeMiCa/raw/main/assets/LeMiCa_NeurIPS2025_appendix.pdf" class="external-link button is-normal is-rounded is-dark" target="_blank"> 
-                  <span class="icon">
-                      <i class="fas fa-file-pdf"></i>
-                  </span>
-                  <span>Appendix</span>
-                </a>
-              </span> -->
+              <span class="link-block">
+              <a class="external-link button is-normal is-rounded is-dark" href="" target="_blank">
+              <span class="icon">
+                <i class="fas fa-share-square">
+                </i>
+              </span>
+              <span>
+                Model
+              </span>
+              </a>
+            </span>
+
+            <span class="link-block">
+              <a class="external-link button is-normal is-rounded is-dark" href="" target="_blank">
+              <span class="icon">
+                <i class="fas fa-database">
+                </i>
+              </span>
+              <span>
+                Dataset
+              </span>
+              </a>
+            </span>
 
               <!-- Project Page Link -->
               <span class="link-block">
-                <a href="https://unicomai.github.io/LeMiCa" target="_blank"
+                <a href="https://unicomai.github.io/HiMo-CLIP" target="_blank"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fas fa-globe"></i>
@@ -212,248 +211,99 @@
   </div>
 </section>
 
-<!-- <section class="hero is-small">
-  <div class="hero-body" style="width: 100%">
-        <div class="carousel-teaser-container">
-          <div class="carousel-teaser carousel-teaser-scroll-left">
-            <img src="./static/images/pic/latt1_part_1.jpg" alt="Image 0">
-            <img src="./static/images/pic/latt1_part_2.jpg" alt="Image 0">            
-            <img src="./static/images/pic/latt2_part_1.jpg" alt="Image 0">
-            <img src="./static/images/pic/latt2_part_2.jpg" alt="Image 0">
-            <img src="./static/images/pic/latt3_part_1.jpg" alt="Image 0">
-            <img src="./static/images/pic/latt3_part_2.jpg" alt="Image 0">
-            <img src="./static/images/pic/cog1_part_1.jpg" alt="Image 0">    
-            <img src="./static/images/pic/cog1_part_2.jpg" alt="Image 0">   
-            <img src="./static/images/pic/cog2_part_1.jpg" alt="Image 0">   
-            <img src="./static/images/pic/cog2_part_2.jpg" alt="Image 0">  
-            <img src="./static/images/pic/cog1_part_3.jpg" alt="Image 0">     
-            <img src="./static/images/pic/cog2_part_3.jpg" alt="Image 0">     
-            <img src="./static/images/pic/ops1_part_1.jpg" alt="Image 0">   
-            <img src="./static/images/pic/ops1_part_2.jpg" alt="Image 0">    
-            <img src="./static/images/pic/ops1_part_3.jpg" alt="Image 0">   
-            <img src="./static/images/pic/ops2_part_1.jpg" alt="Image 0">   
-            <img src="./static/images/pic/ops2_part_2.jpg" alt="Image 0">    
-            <img src="./static/images/pic/ops2_part_3.jpg" alt="Image 0">  
-          </div>
-        </div>
-    </div>
-</section> -->
-
-
-<section class="hero is-small">
-  <div class="hero-body" style="width: 100%; display: flex; align-items: center;">
-    
-    <!-- 左侧标签 -->
-    <!-- <div class="label-column" style="display: flex; flex-direction: column; align-items: flex-start; margin-right: 20px;">
-      <div class="label-item">Original</div>
-      <div class="label-item">TeaCache</div>
-      <div class="label-item">LeMiCa</div>
-    </div> -->
-
-    <!-- 轮播部分 -->
-    <div class="carousel-teaser-container">
-      <div class="carousel-teaser carousel-teaser-scroll-left">
-        <img src="./static/images/pic/latt1_part_1.jpg" alt="Image 0">
-        <img src="./static/images/pic/latt1_part_2.jpg" alt="Image 0">            
-        <img src="./static/images/pic/latt2_part_1.jpg" alt="Image 0">
-        <img src="./static/images/pic/latt2_part_2.jpg" alt="Image 0">
-        <img src="./static/images/pic/latt3_part_1.jpg" alt="Image 0">
-        <img src="./static/images/pic/latt3_part_2.jpg" alt="Image 0">
-        <img src="./static/images/pic/cog1_part_1.jpg" alt="Image 0">    
-        <img src="./static/images/pic/cog1_part_2.jpg" alt="Image 0">   
-        <img src="./static/images/pic/cog2_part_1.jpg" alt="Image 0">   
-        <img src="./static/images/pic/cog2_part_2.jpg" alt="Image 0">  
-        <img src="./static/images/pic/cog1_part_3.jpg" alt="Image 0">     
-        <img src="./static/images/pic/cog2_part_3.jpg" alt="Image 0">     
-        <img src="./static/images/pic/ops1_part_1.jpg" alt="Image 0">   
-        <img src="./static/images/pic/ops1_part_2.jpg" alt="Image 0">    
-        <img src="./static/images/pic/ops1_part_3.jpg" alt="Image 0">   
-        <img src="./static/images/pic/ops2_part_1.jpg" alt="Image 0">   
-        <img src="./static/images/pic/ops2_part_2.jpg" alt="Image 0">    
-        <img src="./static/images/pic/ops2_part_3.jpg" alt="Image 0">  
+<section class="hero teaser">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+    <br>
+      <!-- 替换为你的 teaser 图路径 -->
+      <div style="text-align: center;">
+        <img src="./static/images/motivation.png" alt="HiMo-CLIP Motivation Figure" style="width: 75%; display: block; margin: 0 auto;">
       </div>
+      <span style="font-size: 0.8em; width: 100%; display: inline-block;">(a) Text descriptions of an image often grow in semantic richness, from short to long, by adding more visual details. (b) However, existing models, even those tailored for long-form text, often fail to preserve semantic monotonicity, overlooking this essential principle when scaling to richer descriptions. In contrast, HiMo-CLIP maintains alignment consistency across text granularities, effectively addressing this overlooked yet critical challenge. (Note: FineLIP’s similarity exceeds 1 due to its customized test-time scaling.)</span>
     </div>
-
   </div>
-
-  <!-- 底部标题 -->
-  <div style="text-align: center;">
-    <h2 style="font-size: 1.5em; font-weight: bold; color: #333;">Keyframe Comparison</h2>
-  </div>
-
 </section>
 
-
-
-
-
-
-
-<!-- <section class="hero is-small">
-  <div class="hero-body" style="width: 80%; display: flex; flex-direction: column; align-items: center;">
-
-
-    <div style="width: 100%; display: flex; align-items: stretch;">
-
-
-      <div class="label-column">
-        <div class="label-item">Original</div>
-        <div class="label-item">TeaCache</div>
-        <div class="label-item">LeMiCa</div>
-      </div>
-
-
-      <div class="carousel-teaser-container" style="flex: 1">
-        <div class="carousel-teaser carousel-teaser-scroll-left">
-          <img src="./static/images/pic/latt1_part_1.jpg" alt="Image 0">
-          <img src="./static/images/pic/latt1_part_2.jpg" alt="Image 0">            
-          <img src="./static/images/pic/latt2_part_1.jpg" alt="Image 0">
-          <img src="./static/images/pic/latt2_part_2.jpg" alt="Image 0">
-          <img src="./static/images/pic/latt3_part_1.jpg" alt="Image 0">
-          <img src="./static/images/pic/latt3_part_2.jpg" alt="Image 0">
-          <img src="./static/images/pic/cog1_part_1.jpg" alt="Image 0">    
-          <img src="./static/images/pic/cog1_part_2.jpg" alt="Image 0">   
-          <img src="./static/images/pic/cog2_part_1.jpg" alt="Image 0">   
-          <img src="./static/images/pic/cog2_part_2.jpg" alt="Image 0">  
-          <img src="./static/images/pic/cog1_part_3.jpg" alt="Image 0">     
-          <img src="./static/images/pic/cog2_part_3.jpg" alt="Image 0">     
-          <img src="./static/images/pic/ops1_part_1.jpg" alt="Image 0">   
-          <img src="./static/images/pic/ops1_part_2.jpg" alt="Image 0">    
-          <img src="./static/images/pic/ops1_part_3.jpg" alt="Image 0">   
-          <img src="./static/images/pic/ops2_part_1.jpg" alt="Image 0">   
-          <img src="./static/images/pic/ops2_part_2.jpg" alt="Image 0">    
-          <img src="./static/images/pic/ops2_part_3.jpg" alt="Image 0">  
-        </div>
+<!-- Paper Abstract -->
+<section class="section hero is-light">
+  <div class="hero-body">
+    <div class="container is-max-desktop is-centered has-text-centered">
+      <h2 class="title is-3">Abstract</h2>
+      <div class="content has-text-justified">
+        <p>
+          Contrastive vision-language models like CLIP have achieved impressive results in image-text retrieval by aligning image and text representations in a shared embedding space. However, these models often treat text as flat sequences, limiting their ability to handle complex, compositional, and long-form descriptions. In particular, they fail to capture two essential properties of language: semantic hierarchy, which reflects the multi-level compositional structure of text, and semantic monotonicity, where richer descriptions should result in stronger alignment with visual content.
+          To address these limitations, we propose HiMo-CLIP, a representation-level framework that enhances CLIP-style models without modifying the encoder architecture. HiMo-CLIP introduces two key components: a hierarchical decomposition (HiDe) module that extracts latent semantic components from long-form text via in-batch PCA, enabling flexible, batch-aware alignment across different semantic granularities, and a monotonicity-aware contrastive loss (MoLo) that jointly aligns global and component-level representations, encouraging the model to internalize semantic ordering and alignment strength as a function of textual completeness.
+          These components work in concert to produce structured, cognitively-aligned cross-modal representations. Experiments on multiple image-text retrieval benchmarks show that HiMo-CLIP consistently outperforms strong baselines, particularly under long or compositional descriptions.
+        </p>
       </div>
     </div>
-
-
-    <div style="margin-top: 20px;">
-      <h2 style="font-size: 1.5em; font-weight: bold; color: #333;">Keyframe Comparison</h2>
-    </div>
-
   </div>
-</section> -->
-
-
-
-
-
-
-  <!-- Paper Abstract -->
-  <section class="section hero is-light">
-    <div class="hero-body">
-      <div class="container is-max-desktop is-centered has-text-centered">
-        <h2 class="title is-3">Abstract</h2>
-        <div class="content has-text-justified">
-          <p>
-            We present LeMiCa, a training-free and efficient acceleration framework for diffusion-based video generation. While existing caching strategies primarily focus on reducing local heuristic errors, they often overlook the accumulation of global errors, leading to noticeable content degradation between accelerated and original videos. To address this issue, we formulate cache scheduling as a directed graph with error-weighted edges and introduce a Lexicographic Minimax Path Optimization strategy that explicitly bounds the worst-case path error. This approach substantially improves the consistency of global content and style across generated frames. Extensive experiments on multiple text-to-video benchmarks demonstrate that LeMiCa delivers dual improvements in both inference speed and generation quality. Notably, our method achieves a 2.9× speedup on the Latte model and reaches an LPIPS score of 0.05 on Open-Sora, outperforming prior caching techniques. Importantly, these gains come with minimal perceptual quality degradation, making LeMiCa a robust and generalizable paradigm for accelerating diffusion-based video generation. We believe this approach can serve as a strong foundation for future research on efficient and reliable video synthesis. 
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
+</section>
   <!-- End Abstract -->
 
-  <!-- Teaser Image/Video -->
-  <section class="hero teaser">
-    <div class="hero-body">
-      <div class="container is-max-desktop">
-      <br>
-        <!-- 替换为你的 teaser 图路径 -->
-        <!-- <img src="./static/images/1_overview.jpg" alt="LeMiCa Teaser Figure" style="width: 80%;"> -->
-        <div style="text-align: center;">
-          <img src="./static/images/1_overview.jpg" alt="LeMiCa Teaser Figure" style="width: 85%; display: block; margin: 0 auto;">
-        </div>
-        <span style="font-size: 0.8em; width: 100%; display: inline-block;">Figure 1: Comparison between LeMiCa (globally controlled cache) and traditional local greedy cache methods. Top: Schematic of different caching strategies. Bottom: LeMiCa outperforms baselines in consistency and speed.</span>
+<!-- Teaser Image/Video -->
+<section class="hero teaser">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+    <br>
+      <!-- 替换为你的 teaser 图路径 -->
+      <div style="text-align: center;">
+        <img src="./static/images/framework.png" alt="HiMo-CLIP Teaser Figure" style="width: 100%; display: block; margin: 0 auto;">
       </div>
+      <span style="font-size: 0.8em; width: 100%; display: inline-block;"><b>HiMo-CLIP Framework</b></span>
     </div>
-  </section>
+  </div>
+</section>
   <!-- End Teaser -->
 
   <!-- Method Section -->
 <section class="section">
-  <div class="container is-max-desktop">
+  <div class="container is-max-desktop is-centered has-text-centered">
     <div class="columns is-centered">
       <div class="column is-full-width">
-        <h2 class="title is-3">LeMiCa</h2>
-        
-        <!-- <h2 class="title is-4">Motivation: Limitations of Local-Greedy Caching</h2>
+        <h2 class="title is-4">Motivation</h2>
         <div class="content has-text-justified">
           <p>
-            Existing cache methods rely on local error metrics (e.g., L1 relative distance between adjacent timesteps) and fixed thresholds to decide caching, which suffers from two key limitations:
+            Contrastive vision-language models such as CLIP have shown remarkable performance in aligning images and text within a shared embedding space. However, they typically treat text as flat token sequences, ignoring the compositional and hierarchical nature of language. This simplification limits their ability to process complex and long-form descriptions, where multiple semantic levels coexist.
           </p>
-          <ol>
-            <li><b>Temporal Heterogeneity Ignorance</b>: Diffusion denoising has varying noise levels and semantic importance across timesteps (early steps shape structure, late steps refine details), making uniform thresholds inaccurate.</li>
-            <li><b>Global Error Accumulation</b>: Local error minimization overlooks long-term error propagation, leading to content inconsistency and quality degradation in final videos.</li>
-          </ol>
-          <div class="content has-text-centered">
-            <img src="./static/images/lemica_motivation.png" style="width: 100%;"><br>
-            <span style="font-size: 0.8em; width: 100%; display: inline-block;">Figure 2: (a) Local vs. Global error—caching at t2 (higher local error) causes lower final error than t1. (b) Segment-wise global error: Early cache segments induce larger downstream errors.</span>
-          </div>
-        </div> -->
-
-        <h2 class="title is-4">Motivation: Limitations of Local-Greedy Caching</h2>
-                <div class="content has-text-justified">
-                    <p>
-                        Existing cache methods rely on local error metrics (e.g., L1 relative distance between adjacent timesteps) and fixed thresholds to decide caching, which suffers from two key limitations:
-                    </p>
-                    <ol>
-                        <li><b>Temporal Heterogeneity Ignorance</b>: Diffusion denoising has varying noise levels and semantic importance across timesteps (early steps shape structure, late steps refine details), making uniform thresholds inaccurate.</li>
-                        <li><b>Global Error Accumulation</b>: Local error minimization overlooks long-term error propagation, leading to content inconsistency and quality degradation in final videos.</li>
-                    </ol>
-                    
-                    <div class="content has-text-centered">
-                        <div class="columns is-centered">
-                            <div class="column is-half">
-                                <img src="./static/images/figure_A.jpg" alt="Local vs Global Error" style="width: 80%;"><br>
-                                <span style="font-size: 0.9em; font-weight: bold;">(a) Local vs. Global Cache Error Control
-                            </div>
-                            <div class="column is-half">
-                                <img src="./static/images/figure_B.jpg" alt="Segment-wise Global Error" style="width: 80%;"><br>
-                                <span style="font-size: 0.9em; font-weight: bold;">(b) Segment-wise Error Trends
-                            </div>
-                        </div>
-                        <span style="font-size: 0.9em; width: 100%; display: inline-block; text-align: justify;">
-                          Figure 2: Rethinking cache reuse in denoising diffusion via error estimation. (a) The traditional Local-Greedy ($L_1^{rel}$) strategy uses fixed thresholds on local output differences between adjacent timesteps to decide when to cache. This assumes uniform temporal sensitivity, which can be misleading&mdash;for instance, caching at $t_2$ yields lower final error than $t_1$, despite $t_1$ seeming smoother locally. This highlights the role of temporal heterogeneity. (b) Our <b>Global Outcome-Aware</b> (segment-wise error) strategy estimates final output error when caching outputs over segments of length $len$, starting from timestep $i$. The plot shows that early caches cause greater error, supporting an outcome-sensitive, trajectory-aware strategy over fixed local heuristics.
-                        </span>
-
-
-
-                    </div>
-                </div>
-
-      <h2 class="title is-4">Implementation</h2>
-        <div class="content has-text-justified">
           <p>
-            LeMiCa formulates cache scheduling as a global optimization problem on a directed acyclic graph (DAG). 
-            Each node represents a timestep, and each edge (i → j) means full inference is done at i and j while reusing cached results in between. 
-            The goal is to control global error accumulation while reducing computation.
+            In particular, current models fail to capture two fundamental linguistic properties:
+            <br/>
+            <b>(1) Semantic Hierarchy</b> — the multi-level compositional structure of textual meaning, and
+            <br/>
+            <b>(2) Semantic Monotonicity</b> — the principle that richer or more complete descriptions should correspond to stronger alignment with the visual content.
           </p>
-
-          <p style="text-align:center;">
-            $$L_1^{glob}(i \rightarrow j) = \frac{1}{N} \| x^{cache(i \rightarrow j)}_0 - x^{original}_0 \|_1$$
-          </p>
-
           <p>
-            Here, \(x^{original}_0\) is the output without caching, and \(x^{cache(i \rightarrow j)}_0\) is the output after reusing intermediate caches. 
-            This metric reflects the real downstream impact of caching rather than local step-wise differences.
+            These limitations motivate the design of <b>HiMo-CLIP</b>, which explicitly models both hierarchical and monotonic relationships between vision and language representations while remaining compatible with standard CLIP architectures.
           </p>
+        </div>
 
-          <p>
-            Given a computation budget \(B\), LeMiCa finds a path from the start node \(s\) to the end node \(t\) that minimizes the worst error along the path:
-          </p>
 
-          <p style="text-align:center;">
-            $$\min_{P \in \mathcal{P}^{(B)}_{s \to t}} 
-            \mathrm{LexMax}\big(\mathrm{sort}_{desc}\{w(e) \mid e \in P_{cache}\}\big)$$
-          </p>
-
-          <p>
-            The lexicographic minimax strategy first reduces the largest cache error, then the next largest, ensuring smooth and consistent generation. 
-            This global planning avoids the unstable behavior of local greedy caching and achieves both speedup and fidelity.
-          </p>
+      <h2 class="title is-4">Methods</h2>
+      <div class="content has-text-justified">
+        <p>
+          To address the above limitations, <b>HiMo-CLIP</b> introduces two lightweight, representation-level modules that can be seamlessly integrated into CLIP-style frameworks without altering the encoders:
+        </p>
+        <ul>
+          <li>
+            <b>Hierarchical Decomposition (HiDe):</b>
+            HiDe performs in-batch Principal Component Analysis (PCA) on textual embeddings to extract the most discriminative latent semantic components.
+            These components dynamically adapt to batch context, revealing the intrinsic semantic hierarchy of each text sample.
+            By aligning image representations with both global and component-level embeddings, HiDe enables fine-grained and multi-granular alignment.
+          </li>
+          <li>
+            <b>Monotonicity-aware Contrastive Loss (MoLo):</b>
+            MoLo jointly aligns the image with its full-text embedding and its decomposed semantic components.
+            This design enforces <i>semantic monotonicity</i> — ensuring that alignment strength increases as the text becomes more complete or informative.
+            The loss encourages the model to internalize semantic ordering, leading to structured and cognitively aligned vision-language representations.
+          </li>
+        </ul>
+        <p>
+          Both modules operate purely in the representation space, avoiding architectural modifications and additional supervision.
+          Together, they allow HiMo-CLIP to efficiently capture hierarchical semantics and monotonic alignment properties, achieving superior performance across both long-text and short-text retrieval benchmarks.
+        </p>
       </div>
+
     </div>
   </div>
 </section>
@@ -461,324 +311,69 @@
 
 <!-- Experiments Section -->
 <section class="section">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered">
-      <div class="column is-full-width">
-        <h2 class="title is-3">Evaluations</h2>
-        
-        <h2 class="title is-4">Quantitative Results</h2>
-          <div class="content has-text-centered" style="margin-top: 20px; margin-bottom: 20px;">
-              <img src="./static/images/table1.png" alt="Qualitative or Ablation Results" style="width: 80%;">
+<div class="container is-max-desktop is-centered has-text-centered">
+  <div class="column is-full-width">
+    <h2 class="title is-3">Performance</h2>
+  </div>
+</div>
+
+<section class="section" style="margin-top: -1rem">
+      <div class="container is-max-desktop">
+       <div class="columns is-centered">
+        <div class="column is-full-width">
+         <div class="content has-text-justified">
+          <p>
+              <b>HiMo-CLIP</b> consistently outperforms state-of-the-art methods across all long-text benchmarks. Under the ViT-L/14 backbone, our method achieves 93.0%/93.1%(I2T/T2I) on Urban1k, 82.4%/84.4% ((I2T/T2I)) on Docci, and 62.2%/61.9% (I2T/T2I) on Long-DCI, surpassing the strongest baseline (FineLIP) by pretty margins.
+          </p>
+
+          <div class="columns is-multiline is-centered">
+            <div class="column is-half">
+              <div class="has-text-centered">
+                <img src="./static/images/eval_tb1.png" class="table-image" style="width: 100%; max-width: 700px;" />
+              </div>
+            </div>
+            <div class="column is-half">
+              <div class="has-text-centered">
+                <img src="./static/images/eval_tb2.png" class="table-image" style="width: 100%; max-width: 700px;" />
+              </div>
+            </div>
+            <div class="column is-half">
+              <div class="has-text-centered">
+                <img src="./static/images/eval_tb3.png" class="table-image" style="width: 100%; max-width: 700px;" />
+              </div>
+            </div>
           </div>
-      </div>
-    </div>
-  </div>
-</section>
+          <p>
+               Figure.3 visualizes HiMo@5 trends on HiMo-Docci, where HiMo-CLIP consistently maintains monotonic similarity growth, unlike CLIP and Long-CLIP which often exhibit erratic drops, validating our core assumption that richer subtexts should yield stronger alignment. Figure.4 and Figure.5 extend this analysis with concrete examples for HiMo@2, @3, @4, and @7, showing that HiMo-CLIP reliably preserves correct score orderings even under deeper hierarchies. For instance, HiMo-CLIP achieves the highest qualitative HiMo@4 (0.93) and HiMo@7 (0.97), while FineLIP and TULIP exhibit score reversals, and Long-CLIP yields negative Pearson correlations ($-0.94$, $-0.95$). On shallower tasks, HiMo-CLIP maintains correct ordering at all steps, while FineLIP and TULIP show violations in HiMo@2 and HiMo@3, and even FG-CLIP fails on HiMo@3 despite strong quantitative scores. These results highlight the robustness and scalability of our representation-level alignment in modeling hierarchical semantic consistency across varied depths and content.
+          </p>
+         </div>
 
-
-<!-- =================== 5-Method Video Comparison =================== -->
-
-<section class="section">
-  <div class="container is-max-desktop">
-    <h2 class="title is-4">Visual Results</h2>
-    <h3 class="title is-5">Open-Sora</h3>
-
-    <!-- 方法表头 -->
-    <!-- <div style="display:grid;grid-template-columns:repeat(5, 1fr);gap:12px;align-items:center;margin:12px 0;">
-      <div style="font-weight:700;text-align:center;">Original 26.54s</div>
-      <div style="font-weight:700;text-align:center;">TeaCache-slow 17.58s</div>
-      <div style="font-weight:700;text-align:center;">LeMiCa-slow <span style="color:#e53935; font-weight:800;">17.43s</span></div>
-      <div style="font-weight:700;text-align:center;">TeaCache-fast 12.63s</div>
-      <div style="font-weight:700;text-align:center;">LeMiCa-fast <span style="color:#e53935; font-weight:800;">10.86s</span></div>
-    </div> -->
-
-
-    <!-- 方法表头 -->
-    <div style="display:grid;grid-template-columns:repeat(5, 1fr);gap:12px;align-items:center;margin:12px 0;">
-
-      <div style="font-weight:700;text-align:center;display:flex;flex-direction:column;align-items:center;">
-        Original
-        <div style="font-size:0.95rem;color:#555;">Latency: <span>26.54s</span></div>
-      </div>
-
-      <div style="font-weight:700;text-align:center;display:flex;flex-direction:column;align-items:center;">
-        TeaCache-slow
-        <div style="font-size:0.95rem;color:#555;">Latency: <span>17.58s</span></div>
-      </div>
-
-      <div style="font-weight:700;text-align:center;display:flex;flex-direction:column;align-items:center;">
-        LeMiCa-slow
-        <div style="font-size:0.95rem;color:#555;">Latency: <span style="color:#e53935;font-weight:600;">17.43s</span></div>
-      </div>
-
-      <div style="font-weight:700;text-align:center;display:flex;flex-direction:column;align-items:center;">
-        TeaCache-fast
-        <div style="font-size:0.95rem;color:#555;">Latency: <span>12.63s</span></div>
-      </div>
-
-      <div style="font-weight:700;text-align:center;display:flex;flex-direction:column;align-items:center;">
-        LeMiCa-fast
-        <div style="font-size:0.95rem;color:#555;">Latency: <span style="color:#e53935;font-weight:600;">10.86s</span></div>
-      </div>
-
-    </div>
-
-    <!-- 视频容器 -->
-    <div id="Open-Sora" style="display:flex;flex-direction:column;gap:2px;"></div>
-  </div>
-</section>
-
-
-<!-- =================== 5-Method Image Comparison (Qwen-Image) =================== -->
-
-<section class="section">
-  <div class="container is-max-desktop">
-    <h2 class="title is-4">Extension to Text-to-Image</h2>
-    <h3 class="title is-5">Qwen-Image</h3>
-
-    <!-- 方法表头（4列版本） -->
-    <div style="display:grid;grid-template-columns:repeat(4, 1fr);gap:12px;align-items:center;margin:12px 0;">
-
-      <div style="font-weight:700;text-align:center;display:flex;flex-direction:column;align-items:center;">
-        Original
-        <div style="font-size:0.95rem;color:#555;">Latency: <span>31.22s</span></div>
-      </div>
-
-      <div style="font-weight:700;text-align:center;display:flex;flex-direction:column;align-items:center;">
-        LeMiCa (B=25)
-        <div style="font-size:0.95rem;color:#555;">Latency: <span style="color:#e53935;font-weight:600;">17.93s</span></div>
-      </div>
-
-      <div style="font-weight:700;text-align:center;display:flex;flex-direction:column;align-items:center;">
-        LeMiCa (B=17)
-        <div style="font-size:0.95rem;color:#555;">Latency: <span style="color:#e53935;font-weight:600;">13.52s</span></div>
-      </div>
-
-      <div style="font-weight:700;text-align:center;display:flex;flex-direction:column;align-items:center;">
-        LeMiCa (B=10)
-        <div style="font-size:0.95rem;color:#555;">Latency: 
-          <span style="color:#e53935;font-weight:600;">9.84s</span>
+          <div style="text-align: center;">
+            <img id="teaser" src="./static/images/eval_fig3.png" width="85%"/>
+          </div>
+          <div style="text-align: center;">
+            <img id="teaser" src="./static/images/eval_fig4.png" width="85%"/>
+          </div>
+          <div style="text-align: center;">
+            <img id="teaser" src="./static/images/eval_fig5.png" width="85%"/>
+          </div>
+          <br>
         </div>
+       </div>
       </div>
-
-    </div>
-
-
-    <!-- 图片容器：将下面的 src 改成你的图片路径 -->
-    <div id="Qwen-Image" style="display:flex;flex-direction:column;gap:2px;">
-      <img 
-        src="./static/images/Qwen-Image.jpg" 
-        alt="Qwen-Image visual result" 
-        id="imageToFullscreen"
-        style="width:100%;height:auto;border-radius:6px;display:block;"
-      />
-    </div>
-
-    <br>
-    <br>
-
-    <p style="text-align:center; margin-top: 20px; margin-bottom: 20px; font-size: 1.1rem; font-weight: 500;">
-      Comparison of inference efficiency and visual quality of LeMiCa and other acceleration methods on the Qwen-Image.
-    </p>
-
-    <div style="text-align:center;">
-      <img
-        src="./static/images/qw-tb.jpg"
-        alt="Table comparing LeMiCa with other acceleration methods on Qwen-Image"
-        style="max-width:100%; height:auto;"
-      />
-    </div>
-
-  </div>
-</section>
-
-<script>
-  (function () {
-    function $(sel) { return document.querySelector(sel); }
-
-    function isFullscreen() {
-      return document.fullscreenElement
-        || document.webkitFullscreenElement
-        || document.mozFullScreenElement
-        || document.msFullscreenElement;
-    }
-
-    function enterFullscreen(el) {
-      const rfs = el.requestFullscreen
-        || el.webkitRequestFullscreen
-        || el.mozRequestFullScreen
-        || el.msRequestFullscreen;
-      if (rfs) return rfs.call(el);
-      return Promise.reject(new Error('Fullscreen API not supported'));
-    }
-
-    function exitFullscreen() {
-      const efs = document.exitFullscreen
-        || document.webkitExitFullscreen
-        || document.mozCancelFullScreen
-        || document.msExitFullscreen;
-      if (efs) return efs.call(document);
-      return Promise.resolve();
-    }
-
-    function init() {
-      const container = $('#Qwen-Image');
-      if (!container) return;
-
-      // 用容器全屏，兼容性更好（比直接对 img 全屏稳）
-      container.addEventListener('click', function () {
-        if (!isFullscreen()) {
-          enterFullscreen(container).catch(err => {
-            console.error('进入全屏失败：', err);
-          });
-        } else {
-          exitFullscreen();
-        }
-      });
-
-      // Esc 或系统手势退出后，光标还原
-      document.addEventListener('fullscreenchange', syncCursor);
-      document.addEventListener('webkitfullscreenchange', syncCursor);
-
-      function syncCursor() {
-        container.style.cursor = isFullscreen() ? 'zoom-out' : 'zoom-in';
-      }
-    }
-
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', init);
-    } else {
-      init();
-    }
-  })();
-</script>
-
-<script>
-  const ext = '.mp4';
-  const methods = [
-    { name: 'Original',      base: './static/videos/video_ops/base'  },
-    { name: 'TeaCache-slow', base: './static/videos/video_ops/Teaslow'},
-    { name: 'LeMiCa-slow',   base: './static/videos/video_ops/lex27' },
-    { name: 'TeaCache-fast', base: './static/videos/video_ops/Teafast'},
-    { name: 'LeMiCa-fast',   base: './static/videos/video_ops/lex11' },
-  ];
-
-  const prompts = [
-    "White smoke on a black background. Simply drop it in and change its blending mode to screen or add.-2",
-    "A slow upward pan of a blazing oak fire in an indoor fireplace.-1",
-    "Snow falling over multiple houses and trees in a winter landscape against a night sky. A Christmas festivity and celebration atmosphere.-0",
-    "Summer landscape on a mountain lake.-1",
-    "A close-up of a chameleon slowly changing colors as it moves across different surfaces, showcasing its camouflage abilities.-0",
-  ];
-
-  const container = document.getElementById('Open-Sora');
-  const rows = [];
-
-  // 生成视频行
-  prompts.forEach(promptText => {
-    const row = document.createElement('div');
-    row.style.display = 'grid';
-    row.style.gridTemplateColumns = 'repeat(5, 1fr)';
-    row.style.columnGap = '2px';
-    row.style.alignItems = 'center';
-
-    const vids = [];
-    methods.forEach(m => {
-      const video = document.createElement('video');
-      video.muted = true;
-      video.loop = true;
-      video.autoplay = true;
-      video.playsInline = true;
-      video.preload = 'auto';
-      video.controls = true;
-      video.style.width = '100%';
-      video.style.border = '1px solid #ddd';
-      video.style.borderRadius = '6px';
-
-      const src = document.createElement('source');
-      src.src = encodeURI(`${m.base}/${promptText}${ext}`);
-      src.type = 'video/mp4';
-      video.appendChild(src);
-      row.appendChild(video);
-      vids.push(video);
-    });
-    rows.push(vids);
-    container.appendChild(row);
-  });
-
-  // 工具函数
-  const waitReady = v => new Promise(r => {
-    if (v.readyState >= 2) r();
-    else v.addEventListener('loadeddata', r, { once: true });
-  });
-
-  // 同步逻辑
-  async function syncRow(vids) {
-    await Promise.all(vids.map(waitReady));
-    vids.forEach(v => v.currentTime = 0);
-
-    const master = vids[0];
-    const slaves = vids.slice(1);
-
-    // 启动播放
-    vids.forEach(v => v.play().catch(()=>{}));
-
-    // 定期纠偏
-    const HARD = 0.08; // 秒
-    const SOFT = 0.05;
-    const DELTA = 0.04;
-
-    function tune(slave, diff) {
-      if (Math.abs(diff) < SOFT) {
-        slave.playbackRate = diff > 0 ? 1 - DELTA : 1 + DELTA;
-      } else {
-        slave.currentTime = master.currentTime;
-        slave.playbackRate = 1;
-      }
-    }
-
-    function loop() {
-      const t = master.currentTime;
-      slaves.forEach(s => tune(s, s.currentTime - t));
-      requestAnimationFrame(loop);
-    }
-    requestAnimationFrame(loop);
-  }
-
-  // 每行建立同步
-  window.addEventListener('load', () => {
-    rows.forEach(r => syncRow(r));
-  });
-</script>
-
-
-
-<!-- <section class="section" id="BibTeX">
-  <div class="container is-max-desktop content">
-    <h2 class="title"><a id="bibtex">BibTeX</a></h2>
-    <pre><code>@misc{liu2024timestep,
-      title={Timestep Embedding Tells: It's Time to Cache for Video Diffusion Model},
-      author={Feng Liu and Shiwei Zhang and Xiaofeng Wang and Yujie Wei and Haonan Qiu and Yuzhong Zhao and Yingya Zhang and Qixiang Ye and Fang Wan},
-      year={2024},
-      eprint={2411.19108},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV},
-      url={https://arxiv.org/abs/2411.19108},
-}</code></pre>
-  </div>
-</section> -->
+     </section>
 
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
     <h2 class="title"><a id="bibtex">BibTeX</a></h2>
     <pre>
     <code id="code-snippet">
-  @inproceedings{gao2025lemica,
-    title     = {LeMiCa: Lexicographic Minimax Path Caching for Efficient Diffusion-Based Video Generation},
-    author    = {Huanlin Gao and Ping Chen and Fuyuan Shi and Chao Tan and Zhaoxiang Liu and Fang Zhao and Kai Wang and Shiguo Lian},
-    journal = {Advances in Neural Information Processing Systems (NeurIPS)},
+  @inproceedings{,
+    title     = {HiMo-CLIP: Modeling Semantic Hierarchy and Monotonicity in Vision-Language Alignment},
+    author    = {Ruijia Wu and Ping Chen and Fei Shen and Shaoan Zhao and Qiang Hui and Huanlin Gao and Ting Lu and Zhaoxiang Liu and Fang Zhao and Kai Wang and Shiguo Lian},
+    journal = {AAAI},
     year      = {2025},
-    url       = {https://arxiv.org/abs/2511.00090}
+    url       = {}
   }
   </code></pre>
   </div>
