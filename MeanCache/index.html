@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+<meta property='og:title' content="MeanCache: From Instantaneous to Average Velocity for Accelerating Flow Matching Inference"/>
+<meta property='og:description' content="MeanCache: From Instantaneous to Average Velocity for Accelerating Flow Matching Inference"/>
+<meta property='og:url' content='https://unicomai.github.io/MeanCache/'/>
+<meta property='og:image:width' content='1200' />
+<meta property='og:image:height' content='663' />
+<meta property="og:type" content='website'/>
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="MeanCache: From Instantaneous to Average Velocity for Accelerating Flow Matching Inference">
+  <meta name="keywords" content="MeanCache, Diffusion Video Generation, Caching, Lexicographic Minimax">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MeanCache: From Instantaneous to Average Velocity for Accelerating Flow Matching Inference</title>
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/tab_gallery.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="juxtapose/css/juxtapose.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+  <script src="./static/js/magnifier.js"></script>
+  <link href="https://fonts.cdnfonts.com/css/menlo" rel="stylesheet">
+  <link rel="stylesheet" href="./static/css/image_card_fader.css">
+  <link rel="stylesheet" href="./static/css/image_card_slider.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Patrick+Hand|Google+Sans|Noto+Sans|Castoro|Lato|Open+Sans&effect=shadow-multiple|emboss|3d"> 
+  <!-- <link rel="icon" href="./static/images/logv2.png" type="image/x-icon">  -->
+  <!-- <link rel="shortcut icon" href="./static/images/logv2.png" type="image/x-icon"> -->
+  <script>
+    function copyToClipboard() {
+      var code = document.getElementById("code-snippet").innerText;
+      navigator.clipboard.writeText(code).then(function() {
+        alert('Code copied to clipboard!');
+      }, function(err) {
+        alert('Failed to copy text: ', err);
+      });
+    }
+</script>
+<script>
+    var img = document.getElementById("imageToFullscreen");
+    img.addEventListener("click", () => {
+      if (!document.fullscreenElement) {
+        // 进入全屏
+        img.requestFullscreen().catch(err => {
+          console.error(`无法进入全屏模式: ${err.message}`);
+        });
+      } else {
+        // 退出全屏
+        document.exitFullscreen();
+      }
+    });
+  </script>
+
+  <!--  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script> -->
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+  };
+  </script>
+  <script id="MathJax-script" async 
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+</head>
+
+<body>
+
+  <section class="hero is-small">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+           
+          <!-- <img src="./static/images/logv2.png" style="height:150px; margin-bottom: 20px; margin-top: -0px;"></img> -->
+
+          <h1 class="title is-2 publication-title" style="font-size: 2.6rem">
+                       <!-- <img src="./static/images/logv2.png" style="height:50px; margin-top: -0px;"></img> -->
+                       <span class="MeanCache">MeanCache: </span>From Instantaneous to Average Velocity for Accelerating Flow Matching Inference
+          </h1>
+
+
+          <!-- <p class="subtitle is-4" style="margin-top: 0.5rem;">✨ ICLR 2026 ✨</p> -->
+    
+          <div align="center">
+            <p class="subtitle is-4" style="margin-top: 0.5rem; font-weight: 900; color: #FF0000;">
+              <strong>✨ Accepted by ICLR 2026 ✨</strong>
+            </p>
+          </div>
+
+          <br> 
+          
+          <div class="is-size-4 publication-authors" style="font-size: 1.8rem;">
+            <span class="author-block"> 
+              <a href="https://github.com/joelulu" target="_blank">Huanlin Gao</a><sup>1,2</sup>,&nbsp;
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?hl=zh-CN&view_op=list_works&user=gpNOW2UAAAAJ" target="_blank">Ping Chen</a><sup>1,2</sup>,&nbsp;
+            </span>
+            <span class="author-block">
+              <a href="https://github.com/stone002" target="_blank">Fuyuan Shi</a><sup>1,2</sup>,&nbsp;
+            </span>
+            <span class="author-block">
+              <a href="#" target="_blank">Ruijia Wu</a><sup>2</sup>,&nbsp;
+            </span>
+            <span class="author-block">
+              <a href="#" target="_blank">Yantao Li</a><sup>1,2,3</sup>,&nbsp;
+            </span>
+            <span class="author-block">
+              <a href="#" target="_blank">Qiang Hui</a><sup>1,2</sup>,&nbsp;
+            </span>
+            <span class="author-block">
+              <a href="#" target="_blank">Yuren You</a><sup>1,2</sup>,&nbsp;
+            </span>
+            <span class="author-block">
+              <a href="#" target="_blank">Ting Lu</a><sup>1,2</sup>,&nbsp;
+            </span>
+            <span class="author-block">
+              <a href="https://github.com/tanchaow" target="_blank">Chao Tan</a><sup>1,2</sup>,&nbsp;
+            </span>
+            <span class="author-block">
+              <a href="#" target="_blank">Shaoan Zhao</a><sup>1,2</sup>,&nbsp;
+            </span>
+            <span class="author-block">
+               <a href="https://scholar.google.com/citations?hl=en&user=L4OXOs0AAAAJ" target="_blank">Zhaoxiang Liu</a><sup>1,2</sup>
+            </span>
+            <br>
+            <span class="author-block">
+              <a href="https://github.com/FangGet" target="_blank">Fang Zhao</a><sup>1,2</sup><sup>*</sup>,&nbsp;
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=CFUQLCAAAAAJ&hl=en" target="_blank">Kai Wang</a><sup>1,2</sup>,&nbsp;
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com.hk/citations?user=kCC2oKwAAAAJ&hl=zh-CN&oi=ao" target="_blank">Shiguo Lian</a><sup>1,2</sup><sup>*</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Data Science & Artificial Intelligence Research Institute, China Unicom,&nbsp;</span>
+            <span class="author-block"><sup>2</sup>Unicom Data Intelligence, China Unicom,&nbsp;</span>
+            <span class="author-block"><sup>3</sup>National Key Laboratory for Novel Software Technology, Nanjing University</span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <!-- <span class="author-block">
+              {gaohl51, chenp181, shify15, tanc10, liux750, zhaof50, wangk115, liansg}@chinaunicom.cn
+            </span>
+            <br> -->
+            <span class="author-block">(* Corresponding author.)</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- Code Link -->
+              <span class="link-block">
+                <a href="https://github.com/UnicomAI/MeanCache" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Paper Link -->
+              <span class="link-block">
+                <a href="https://openreview.net/pdf?id=GMCyL7Xs9R" class="external-link button is-normal is-rounded is-dark" target="_blank"> <!-- 替换为你的论文链接 -->
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+
+
+              <!-- Project Page Link -->
+              <span class="link-block">
+                <a href="https://unicomai.github.io/MeanCache" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-globe"></i>
+                  </span>
+                  <span>Project Page</span>
+                </a>
+              </span>
+              <!-- Bibtex Link -->
+              <span class="link-block">
+                <a href="#bibtex"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-obp"></i>
+                  </span>
+                  <span>BibTex</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<div align="center">
+  <video src="https://github.com/user-attachments/assets/6deadbcf-0a7f-4ecc-96fa-645ca86bba7f" 
+         muted 
+         autoplay 
+         loop 
+         playsinline 
+         width="70%">
+  </video>
+</div>
+
+
+  <!-- Paper Abstract -->
+  <section class="section hero is-light">
+    <div class="hero-body">
+      <div class="container is-max-desktop is-centered has-text-centered">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            We present MeanCache, a training-free caching framework for efficient Flow
+            Matching inference. Existing caching methods reduce redundant computation
+            but typically rely on instantaneous velocity information (e.g., feature caching),
+            which often leads to severe trajectory deviations and error accumulation under
+            high acceleration ratios. MeanCache introduces an average-velocity perspective:
+            by leveraging cached Jacobian–vector products (JVP) to construct interval aver
+            age velocities from instantaneous velocities, it effectively mitigates local error
+            accumulation. To further improve cache timing and JVP reuse stability, we de
+            velop a trajectory-stability scheduling strategy as a practical tool, employing a
+            Peak-Suppressed Shortest Path under budget constraints to determine the sched
+            ule. Experiments on FLUX.1, Qwen-Image, and HunyuanVideo demonstrate that
+            MeanCache achieves 4.12×, 4.56×, and 3.59× acceleration, respectively, while
+            consistently outperforming state-of-the-art caching baselines in generation qual
+            ity. We believe this simple yet effective approach provides a new perspective for
+            Flow Matching inference and will inspire further exploration of stability-driven
+            acceleration in commercial-scale generative models.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Abstract -->
+
+   
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">MeanCache</h2>
+
+          <h2 class="title is-4">Motivation: From Instantaneous to Average Velocity</h2>
+          <div class="content has-text-justified">
+            <p>
+              In Flow Matching inference, existing caching methods primarily rely on reusing <b>Instantaneous Velocity</b> or its feature-level proxies. However, we observe that instantaneous velocity often exhibits <b>sharp fluctuations</b> across timesteps. This leads to severe trajectory deviations and cumulative errors, especially as the cache interval increases.
+            </p>
+            <p>
+              Inspired by MeanFlow, we propose <b>MeanCache</b>. Compared to unstable instantaneous velocity, <b>Average Velocity</b> is significantly smoother and more robust over time. By shifting the caching perspective from a single "point" to an "interval," MeanCache effectively mitigates trajectory drift under high acceleration ratios.
+            </p>
+
+            <img src="./static/images/pic/cache_interval.png" alt="Instantaneous vs Average Velocity" style="width: 100%; display: block; margin: 1.5rem auto;">
+
+            <div class="notification is-light" style="text-align: left;">
+              <p>
+                <strong>Figure 1: Instantaneous vs. Average Velocity and JVP Caching.</strong> (Left) Along the original trajectory, instantaneous velocity shows sharp fluctuations, while average velocity is much smoother. (Middle) At timestep 927, JVP Caching reduces error accumulation, though its effectiveness depends on the cache interval and hyperparameter $K$. (Right) At timestep 551, it achieves stronger error mitigation, showing that effectiveness varies across timesteps. Both middle and right figures are under the single-cache setting on the original trajectory.
+            </p>
+            </div>
+          </div>
+
+          <h2 class="title is-4">Implementation: Average-Velocity Perspective</h2>
+          
+          <h3 class="title is-5">1. JVP-Based Cache Construction</h3>
+          <div class="content has-text-justified">
+            <p>
+              We leverage <b>Jacobian-Vector Products (JVP)</b> to construct estimated interval average velocities. By reusing JVP information calculated at prior timesteps, we transform the current instantaneous velocity $v$ into an estimated average velocity $\hat{u}$ for the target interval. This approach compensates for trajectory deviations without additional inference overhead:
+            </p>
+            
+            <img src="./static/images/pic/average1.jpg" alt="MeanCache Principle" style="width: 60%; display: block; margin: 1.5rem auto;">
+
+            <div class="notification is-light" style="text-align: left;">
+              <p>
+                <strong>Figure 2: From Instantaneous to Average Velocity.</strong> Directly caching the instantaneous velocity $v(z_t,t)$ over $[t,s]$ easily leads to trajectory drift and error accumulation, whereas the average velocity $u(z_t,t,s)$ accurately reaches the target $s$. MeanCache introduces a prior timestep $r$ and reuses $\mathrm{JVP}_{r \to t}$ to estimate the average velocity $\hat{u}(z_t,t,s)$, thereby correcting the trajectory and effectively mitigating error accumulation.
+              </p>
+            </div>
+          </div>
+
+          <h3 class="title is-5">2. Trajectory-Stability Scheduling</h3>
+          <div class="content has-text-justified">
+            <p>
+              To achieve an optimal balance between speed and quality while accounting for temporal heterogeneity, we propose a trajectory-stability scheduling algorithm:
+            </p>
+            <ul>
+              <li>
+                <b>Stability Map via Graph Representation</b>: We model the inference process as a Multigraph, where the edge weight $\mathcal{L}_K(t,s)$ represents the <b>Stability Deviation</b>—the error between predicted and true average velocities under a cache span $K$:
+                $$\mathcal{L}_K(t,s) = \frac{1}{N} \left\| u(z_t,t,s) - v(z_t,t) - (s-t)\widehat{\text{JVP}}_K \right\|_1$$
+              </li>
+              <li>
+                <b>Peak-Suppressed Shortest Path</b>: Given a computation budget $\mathcal{B}$, we solve for a "peak-suppressed" shortest path. By introducing a penalty coefficient $\gamma$ for high-error edges, this strategy ensures smooth and continuous trajectory generation:
+                $$\pi^\star = \arg\min_{\pi \in \mathcal{P}(T,0)} \sum_{e \in \pi} \mathcal{C}(e)^\gamma \quad \text{s.t.} \quad |\pi| \leq \mathcal{B}$$
+              </li>
+            </ul>
+          </div>
+
+
+          <h3 class="title is-4" style="text-align: left;">Content Consistency</h3>
+          <div class="content" style="text-align: left;">
+            <p>
+              Maintaining content consistency is a primary challenge for acceleration frameworks. Rare words, characterized by ambiguous semantics and low frequency, often lead to significant visual drift during the denoising process. <b>MeanCache</b> demonstrates superior potential in addressing this challenge.
+            </p>
+
+            <img src="./static/images/pic/sppeedup_rare.jpg" alt="Content Consistency Comparison" style="width: 100%; display: block; margin: 1.5rem 0;">
+            <p>
+              <strong>Figure 3: Content consistency under rare-word prompts "Matutinal".
+            </p>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title"><a id="bibtex">BibTeX</a></h2>
+    <pre><code id="code-snippet">
+      @inproceedings{gao2025meancache,
+        title     = {MeanCache: From Instantaneous to Average Velocity for Accelerating Flow Matching Inference},
+        author    = {Huanlin Gao and Ping Chen and Fuyuan Shi and Ruijia Wu and Yantao Li and Qiang Hui and Yuren You and Ting Lu and Chao Tan and Shaoan Zhao and Zhaoxiang Liu and Fang Zhao and Kai Wang and Shiguo Lian},
+        booktitle = {International Conference on Learning Representations (ICLR)},
+        year      = {2026},
+        url       = {https://arxiv.org/abs/2511.00090}
+      }
+    </code></pre>
+  </div>
+</section>
