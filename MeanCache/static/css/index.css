@@ -186,8 +186,8 @@ body {
   height: 0px;
 }
 
-/* Gradient style for "lemica" */
-.lemica {
+/* Gradient style for "meancache" */
+.meancache {
   background: linear-gradient(90deg, #000080, #4B0082, #FF4500, #FFD700);
   background-clip: text;
   color: transparent;
@@ -196,8 +196,8 @@ body {
   background-size: 150%;
 }
 
-/* Hover effect for "lemica" gradient */
-.lemica:hover {
+/* Hover effect for "meancache" gradient */
+.meancache:hover {
   background-position: right center; /* Shifts the gradient on hover */
   transform: scale(1.1); /* Slight zoom effect */
 }
@@ -371,7 +371,7 @@ body {
   width: 1em;
   height: 1em;
   display: inline-block;
-  background-image: url('./static/images/lemica_icon.png'); /* 替换为你的图标路径 */
+  background-image: url('./static/images/meancache_icon.png'); /* 替换为你的图标路径 */
   background-size: cover;
   vertical-align: middle;
   line-height: 1;
