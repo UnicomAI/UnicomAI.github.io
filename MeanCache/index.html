@@ -319,13 +319,15 @@
 
           <h3 class="title is-4">🖼️ Visual Results</h3>
           <h3 class="title is-5">Z-Image</h3>
-          
+
           <div class="table-container">
             <table class="table is-bordered is-fullwidth" style="table-layout: fixed;">
               <tbody>
                 <tr>
                   <th style="background-color: #f5f5f5; vertical-align: middle; width: 120px;" class="has-text-centered">Method</th>
-                  <td class="has-text-centered has-text-weight-bold"><a href="https://github.com/Tongyi-MAI/Z-Image" target="_blank" style="color: #3273dc;">Z-Image-base</a></td>
+                  <td class="has-text-centered has-text-weight-bold">
+                    Z-Image-base
+                  </td>
                   <td class="has-text-centered">MeanCache (B=25)</td>
                   <td class="has-text-centered">MeanCache (B=20)</td>
                   <td class="has-text-centered">MeanCache (B=15)</td>
@@ -342,63 +344,34 @@
                 <tr>
                   <th style="background-color: #f5f5f5; vertical-align: middle;" class="has-text-centered">T2I</th>
                   <td style="padding: 0; vertical-align: middle;">
-                    <img src="./static/images/pic/image_nocache.png" class="preview-img" onclick="openModal(this.src)" style="width: 100%; display: block; cursor: zoom-in;">
+                    <img src="./static/images/pic/image_nocache.png" style="width: 100%; display: block;">
                   </td>
                   <td style="padding: 0; vertical-align: middle;">
-                    <img src="./static/images/pic/image_JVP_cache_25.png" class="preview-img" onclick="openModal(this.src)" style="width: 100%; display: block; cursor: zoom-in;">
+                    <img src="./static/images/pic/image_JVP_cache_25.png" style="width: 100%; display: block;">
                   </td>
                   <td style="padding: 0; vertical-align: middle;">
-                    <img src="./static/images/pic/image_JVP_cache_20.png" class="preview-img" onclick="openModal(this.src)" style="width: 100%; display: block; cursor: zoom-in;">
+                    <img src="./static/images/pic/image_JVP_cache_20.png" style="width: 100%; display: block;">
                   </td>
                   <td style="padding: 0; vertical-align: middle;">
-                    <img src="./static/images/pic/image_JVP_cache_15.png" class="preview-img" onclick="openModal(this.src)" style="width: 100%; display: block; cursor: zoom-in;">
+                    <img src="./static/images/pic/image_JVP_cache_15.png" style="width: 100%; display: block;">
                   </td>
                   <td style="padding: 0; vertical-align: middle;">
-                    <img src="./static/images/pic/image_JVP_cache_13.png" class="preview-img" onclick="openModal(this.src)" style="width: 100%; display: block; cursor: zoom-in;">
+                    <img src="./static/images/pic/image_JVP_cache_13.png" style="width: 100%; display: block;">
                   </td>
                 </tr>
               </tbody>
             </table>
             <p>Comparisons on a Single H800 GPU</p>
           </div>
-          
-
-          <div id="image-modal" class="modal">
-            <div class="modal-background" onclick="closeModal()"></div>
-            <div class="modal-content">
-              <p class="image">
-                <img id="modal-img" src="" alt="">
-              </p>
-            </div>
-            <button class="modal-close is-large" aria-label="close" onclick="closeModal()"></button>
-          </div>
-
-          <script>
-            function openModal(src) {
-              document.getElementById('modal-img').src = src;
-              document.getElementById('image-modal').classList.add('is-active');
-            }
-
-            function closeModal() {
-              document.getElementById('image-modal').classList.remove('is-active');
-            }
-
-            // 按 Esc 键关闭
-            document.addEventListener('keydown', function(event) {
-              if (event.key === "Escape") closeModal();
-            });
-          </script>
 
           <style>
-            .preview-img {
-              transition: filter 0.2s;
-            }
-            .preview-img:hover {
-              filter: brightness(0.9);
-            }
-            /* 确保表格单元格边框不会因为 padding:0 显得突兀 */
+            /* 仅保留必要的表格边框修正 */
             .table td {
               border-width: 1px !important;
+            }
+            /* 确保图片在单元格内不留缝隙 */
+            .table td img {
+              border-radius: 0; /* 如果需要完全占满不留圆角，设为0 */
             }
           </style>
 
