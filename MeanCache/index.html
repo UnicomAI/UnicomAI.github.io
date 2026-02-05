@@ -331,8 +331,139 @@
         </div>
       </div>
     </div>
+
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <hr>
+          <h2 class="title is-4">MeanCache vs. LeMiCa</h2>
+          <div class="content has-text-justified">
+            <p style="font-weight: normal;">
+              This benchmark evaluates the performance of <b>MeanCache</b> against <b>LeMiCa</b> using the <b>Qwen-Image-2512</b> model as the base.
+            </p>
+
+            <h3 class="title is-5">🚀 Efficiency Comparison</h3>
+            <p>Baseline Latency (Original Qwen-Image-2512): 32.8s</p>
+            <div class="table-container">
+              <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+                <thead>
+                  <tr>
+                    <th class="has-text-centered"><b>Constraint</b></th>
+                    <th><b>Method</b></th>
+                    <th class="has-text-centered"><b>Latency</b></th>
+                    <th class="has-text-centered"><b>Speedup</b></th>
+                    <th class="has-text-centered"><b>Time Reduction</b></th>
+                  </tr>
+                </thead>
+                <tbody style="font-weight: normal;"> <tr>
+                    <td rowspan="2" class="has-text-centered" style="vertical-align: middle; font-weight: normal;">$B=25$</td>
+                    <td style="font-weight: normal;">LeMiCa</td>
+                    <td class="has-text-centered" style="font-weight: normal;">18.83 s</td>
+                    <td class="has-text-centered" style="font-weight: normal;">1.74x</td>
+                    <td class="has-text-centered" style="font-weight: normal;">-</td>
+                  </tr>
+                  <tr>
+                    <td style="font-weight: normal;"><b>MeanCache</b></td>
+                    <td class="has-text-centered" style="font-weight: bold;">17.13 s</td>
+                    <td class="has-text-centered" style="font-weight: bold;">1.91x</td>
+                    <td class="has-text-centered" style="font-weight: bold;">9.0%</td>
+                  </tr>
+                  <tr>
+                    <td rowspan="2" class="has-text-centered" style="vertical-align: middle; font-weight: normal;">$B=17$</td>
+                    <td style="font-weight: normal;">LeMiCa</td>
+                    <td class="has-text-centered" style="font-weight: normal;">14.35 s</td>
+                    <td class="has-text-centered" style="font-weight: normal;">2.29x</td>
+                    <td class="has-text-centered" style="font-weight: normal;">-</td>
+                  </tr>
+                  <tr>
+                    <td style="font-weight: normal;"><b>MeanCache</b></td>
+                    <td class="has-text-centered" style="font-weight: bold;">11.67 s</td>
+                    <td class="has-text-centered" style="font-weight: bold;">2.81x</td>
+                    <td class="has-text-centered" style="font-weight: bold;">18.7%</td>
+                  </tr>
+                  <tr>
+                    <td rowspan="2" class="has-text-centered" style="vertical-align: middle; font-weight: normal;">$B=10$</td>
+                    <td style="font-weight: normal;">LeMiCa</td>
+                    <td class="has-text-centered" style="font-weight: normal;">10.41 s</td>
+                    <td class="has-text-centered" style="font-weight: normal;">3.15x</td>
+                    <td class="has-text-centered" style="font-weight: normal;">-</td>
+                  </tr>
+                  <tr>
+                    <td style="font-weight: normal;"><b>MeanCache</b></td>
+                    <td class="has-text-centered" style="font-weight: bold;">6.95 s</td>
+                    <td class="has-text-centered" style="font-weight: bold;">4.72x</td>
+                    <td class="has-text-centered" style="font-weight: bold;">33.2%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3 class="title is-5">🎨 Quality Comparison</h3>
+            <div class="table-container">
+              <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+                <thead>
+                  <tr>
+                    <th class="has-text-centered"><b>Constraint</b></th>
+                    <th><b>Method</b></th>
+                    <th class="has-text-centered"><b>PSNR (↑)</b></th>
+                    <th class="has-text-centered"><b>SSIM (↑)</b></th>
+                    <th class="has-text-centered"><b>LPIPS (↓)</b></th>
+                  </tr>
+                </thead>
+                <tbody style="font-weight: normal;">
+                  <tr>
+                    <td rowspan="2" class="has-text-centered" style="vertical-align: middle; font-weight: normal;">$B=25$</td>
+                    <td style="font-weight: normal;">LeMiCa</td>
+                    <td class="has-text-centered" style="font-weight: normal;">29.20</td>
+                    <td class="has-text-centered" style="font-weight: bold;">0.945</td>
+                    <td class="has-text-centered" style="font-weight: normal;">0.065</td>
+                  </tr>
+                  <tr>
+                    <td style="font-weight: normal;"><b>MeanCache</b></td>
+                    <td class="has-text-centered" style="font-weight: bold;">29.46</td>
+                    <td class="has-text-centered" style="font-weight: normal;">0.944</td>
+                    <td class="has-text-centered" style="font-weight: bold;">0.057</td>
+                  </tr>
+                  <tr>
+                    <td rowspan="2" class="has-text-centered" style="vertical-align: middle; font-weight: normal;">$B=17$</td>
+                    <td style="font-weight: normal;">LeMiCa</td>
+                    <td class="has-text-centered" style="font-weight: normal;">24.31</td>
+                    <td class="has-text-centered" style="font-weight: normal;">0.835</td>
+                    <td class="has-text-centered" style="font-weight: normal;">0.176</td>
+                  </tr>
+                  <tr>
+                    <td style="font-weight: normal;"><b>MeanCache</b></td>
+                    <td class="has-text-centered" style="font-weight: bold;">26.49</td>
+                    <td class="has-text-centered" style="font-weight: bold;">0.907</td>
+                    <td class="has-text-centered" style="font-weight: bold;">0.104</td>
+                  </tr>
+                  <tr>
+                    <td rowspan="2" class="has-text-centered" style="vertical-align: middle; font-weight: normal;">$B=10$</td>
+                    <td style="font-weight: normal;">LeMiCa</td>
+                    <td class="has-text-centered" style="font-weight: normal;">17.80</td>
+                    <td class="has-text-centered" style="font-weight: normal;">0.637</td>
+                    <td class="has-text-centered" style="font-weight: normal;">0.368</td>
+                  </tr>
+                  <tr>
+                    <td style="font-weight: normal;"><b>MeanCache</b></td>
+                    <td class="has-text-centered" style="font-weight: bold;">19.44</td>
+                    <td class="has-text-centered" style="font-weight: bold;">0.767</td>
+                    <td class="has-text-centered" style="font-weight: bold;">0.237</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
+
+
+
+
+  
 
 
 <section class="section" id="BibTeX">
