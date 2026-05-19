@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+<meta property="og:title" content="PaLMR: Towards Faithful Visual Reasoning via Multimodal Process Alignment" />
+<meta property="og:description" content="PaLMR aligns multimodal reasoning processes with verifiable visual evidence to reduce reasoning hallucinations." />
+<meta property="og:url" content="https://unicomai.github.io/PaLMR/" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="663" />
+<meta property="og:type" content="website" />
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="PaLMR: Towards Faithful Visual Reasoning via Multimodal Process Alignment">
+  <meta name="keywords" content="PaLMR, Multimodal Large Language Models, Visual Reasoning, Process Alignment, Reinforcement Learning">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PaLMR: Towards Faithful Visual Reasoning via Multimodal Process Alignment</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro|Lato|Open+Sans">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script>
+    function copyToClipboard() {
+      const code = document.getElementById("code-snippet").innerText;
+      navigator.clipboard.writeText(code).then(function() {
+        alert("BibTeX copied to clipboard!");
+      }, function() {
+        alert("Failed to copy BibTeX.");
+      });
+    }
+  </script>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"], ["\\(", "\\)"]],
+        displayMath: [["$$", "$$"], ["\\[", "\\]"]],
+        processEscapes: true
+      },
+      options: {
+        skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"]
+      }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+  <section class="hero is-small publication-header">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <br>
+            <br>
+            <h1 class="title is-2 publication-title">
+              <span class="palmr">PaLMR:</span> Towards Faithful Visual Reasoning via Multimodal Process Alignment
+            </h1>
+
+            <p class="subtitle is-4 venue-line">
+              CVPR 2026 Findings
+            </p>
+
+            <div class="is-size-4 publication-authors">
+              <span class="author-block"><a href="https://liac-li.github.io" target="_blank">Yantao Li</a><sup>1,2,3</sup>,&nbsp;</span>
+              <span class="author-block">Qiang Hui<sup>2,3</sup>,&nbsp;</span>
+              <span class="author-block">Chenyang Yan<sup>2,3</sup>,&nbsp;</span>
+              <span class="author-block">Kanzhi Cheng<sup>2,3</sup>,&nbsp;</span>
+              <span class="author-block">Fang Zhao<sup>2,3</sup>,&nbsp;</span>
+              <span class="author-block">Chao Tan<sup>2,3</sup>,&nbsp;</span>
+              <span class="author-block">Huanling Gao<sup>2,3</sup>,&nbsp;</span>
+              <span class="author-block">Jianbing Zhang<sup>2,3</sup>,&nbsp;</span>
+              <span class="author-block">Kai Wang<sup>2,3</sup>,&nbsp;</span>
+              <span class="author-block">Xinyu Dai<sup>1</sup>,&nbsp;</span>
+              <span class="author-block">Shiguo Lian<sup>2,3</sup></span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup>1</sup>National Key Laboratory for Novel Software Technology, Nanjing University,&nbsp;</span>
+              <span class="author-block"><sup>2</sup>Data Science & Artificial Intelligence Research Institute, China Unicom,&nbsp;</span>
+              <span class="author-block"><sup>3</sup>Unicom Data Intelligence, China Unicom</span>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/2603.06652" class="external-link button is-normal is-rounded is-dark" target="_blank">
+                    <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+                <!-- <span class="link-block">
+                  <a href="https://arxiv.org/pdf/2603.06652" class="external-link button is-normal is-rounded is-dark" target="_blank">
+                    <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                    <span>PDF</span>
+                  </a>
+                </span> -->
+                <!-- <span class="link-block"> <a href="https://github.com/UnicomAI/PaLMR" class="external-link button is-normal is-rounded is-dark" target="_blank"> <span class="icon"><i class="fab fa-github"></i></span>
+                    <span>Code</span>
+                  </a>
+                </span> -->
+                <span class="link-block">
+                  <a href="#bibtex" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="ai ai-obp"></i></span>
+                    <span>BibTeX</span>
+                  </a>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body has-text-centered">
+        <div class="teaser-card">
+          <div class="teaser-kicker">Process-Aligned Multimodal Reasoning</div>
+          <h2 class="title is-3">Faithful visual reasoning should get both the answer and the evidence right.</h2>
+          <p>
+            PaLMR addresses process hallucinations where multimodal models arrive at correct final answers
+            while misperceiving the visual evidence used in their reasoning chains.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section hero is-light">
+    <div class="hero-body">
+      <div class="container is-max-desktop is-centered has-text-centered">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Reinforcement learning has recently improved the reasoning ability of Large Language Models and
+            Multimodal LLMs, yet prevailing reward designs emphasise final-answer correctness and consequently
+            tolerate process hallucinations, cases where models reach the right answer while misperceiving
+            visual evidence. We address this process-level misalignment with <b>PaLMR</b>, a framework that
+            aligns not only outcomes but also the reasoning process itself.
+          </p>
+          <p>
+            PaLMR comprises two complementary components: a perception-aligned data layer that constructs
+            process-aware reasoning data with structured pseudo-ground-truths and verifiable visual facts,
+            and a process-aligned optimisation layer that constructs a hierarchical reward fusion scheme with
+            a process-aware scoring function to encourage visually faithful chains-of-thought and improve
+            training stability.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">Method Overview</h2>
+          <div class="content has-text-justified">
+            <p>
+              PaLMR introduces multimodal process alignment for visual reasoning. Instead of rewarding only
+              final-answer correctness, it makes visual facts and intermediate reasoning steps explicit, then
+              optimizes the model toward chains of thought that remain faithful to the image.
+            </p>
+          </div>
+
+          <div class="method-grid">
+            <div class="method-card">
+              <div class="method-index">1</div>
+              <h3 class="title is-5">Perception-Aligned Data Layer</h3>
+              <p>
+                Builds process-aware reasoning data with structured pseudo-ground-truths and verifiable visual
+                facts, giving supervision to the visual evidence in reasoning process.
+              </p>
+            </div>
+            <div class="method-card">
+              <div class="method-index">2</div>
+              <h3 class="title is-5">Process-Aligned Optimization Layer</h3>
+              <p>
+                Uses hierarchical reward fusion and process-aware scoring to encourage visually faithful
+                reasoning traces while maintaining reinforcement learning stability.
+              </p>
+            </div>
+          </div>
+
+          <figure class="main-figure">
+            <img src="./static/assets/main_figure.png" alt="Overview of the PaLMR framework">
+            <figcaption>
+              Overview of PaLMR, including perception-aligned data construction and process-aligned optimization.
+            </figcaption>
+          </figure>
+
+          <h2 class="title is-3">Key Highlights</h2>
+          <div class="content">
+            <ul>
+              <li><b>Targets process hallucination:</b> reduces cases where the final answer is correct but the reasoning process contradicts visual evidence.</li>
+              <li><b>Enhances human evaluation alignment:</b> replaces point-wise scoring with pairwise comparisons to achieve a significantly higher human alignment ratio(>80%). This provides a robust, human-aligned signal for optimizing perceptual grounding.</li>
+              <li><b>Ensures training stability:</b> employs a hierarchical reward fusion scheme that requires coherent visual perception before rewarding the final answer. This rigorous gating mechanism maintains stable, monotonically increasing accuracy and reasoning stability.</li>
+              <li><b>Aligns evidence and reasoning:</b> connects structured visual facts with chains of thought through process-level supervision.</li>
+            </ul>
+          </div>
+
+          <h2 class="title is-3">Results</h2>
+          <div class="content has-text-justified">
+            <p>
+              Experiments on Qwen2.5-VL-7B show that PaLMR substantially reduces reasoning hallucinations and
+              improves visual reasoning fidelity across multimodal reasoning benchmarks.
+            </p>
+          </div>
+
+          <div class="results-table-container">
+            <table class="academic-table">
+              <thead>
+                <tr>
+                  <th>Model</th>
+                  <th>#Data</th>
+                  <th>MMMU<sub>val</sub></th>
+                  <th>HallusionBench</th>
+                  <th>MathVerse<sub>Vision Only</sub></th>
+                  <th>MMStar</th>
+                  <th>MathVista</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>GPT-4o </td>
+                  <td>-</td>
+                  <td>60.0</td>
+                  <td>68.0</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>63.8</td>
+                </tr>
+                <tr>
+                  <td>Gemini2-Flash </td>
+                  <td>-</td>
+                  <td>70.6</td>
+                  <td>69.4</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>70.4</td>
+                </tr>
+                <tr>
+                  <td>Qwen2.5-VL-72B </td>
+                  <td>-</td>
+                  <td>68.2</td>
+                  <td>71.4</td>
+                  <td>-</td>
+                  <td>70.8</td>
+                  <td>74.8</td>
+                </tr>
+                <tr>
+                  <td>Qwen2.5-VL-32B </td>
+                  <td>-</td>
+                  <td>63.7</td>
+                  <td>72.1</td>
+                  <td>54.3</td>
+                  <td>67.3</td>
+                  <td>74.7</td>
+                </tr>
+                <tr class="midrule">
+                  <td>InternVL2.5-8B </td>
+                  <td>-</td>
+                  <td>56.2</td>
+                  <td>67.4</td>
+                  <td>-</td>
+                  <td>62.9</td>
+                  <td>64.4</td>
+                </tr>
+                <tr>
+                  <td>MM-Eureka-7B </td>
+                  <td>15K</td>
+                  <td>55.4</td>
+                  <td>69.5</td>
+                  <td>46.6</td>
+                  <td>64.6</td>
+                  <td>73.0</td>
+                </tr>
+                <tr>
+                  <td>OpenVLThinker-7B </td>
+                  <td>12K</td>
+                  <td>56.3</td>
+                  <td>66.9</td>
+                  <td>40.4</td>
+                  <td>62.1</td>
+                  <td>70.2</td>
+                </tr>
+                <tr>
+                  <td>Perception-R1-7B </td>
+                  <td>2K</td>
+                  <td>56.3</td>
+                  <td>70.0</td>
+                  <td>46.1</td>
+                  <td>66.3</td>
+                  <td>73.6</td>
+                </tr>
+                <tr>
+                  <td>Qwen2.5-VL-7B </td>
+                  <td>-</td>
+                  <td>56.4</td>
+                  <td>63.8</td>
+                  <td>42.6</td>
+                  <td>64.3</td>
+                  <td>68.2</td>
+                </tr>
+                <tr>
+                  <td class="indent">+ GRPO</td>
+                  <td>4.7K</td>
+                  <td>57.8</td>
+                  <td>66.7</td>
+                  <td>45.9</td>
+                  <td>66.0</td>
+                  <td><strong>74.1</strong></td>
+                </tr>
+                <tr>
+                  <td>PaLMR-7B</td>
+                  <td>4.7K</td>
+                  <td><strong>59.3</strong></td>
+                  <td><strong>70.9</strong></td>
+                  <td><strong>47.5</strong></td>
+                  <td><strong>67.1</strong></td>
+                  <td>73.8</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2 class="title is-3">Qualitative Results</h2>
+          <figure class="banner-figure">
+            <img src="./static/assets/banner.png" alt="Qualitative examples of PaLMR reasoning">
+            <figcaption>
+              Qualitative examples showing how PaLMR improves visual reasoning faithfulness.
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title"><a id="bibtex">BibTeX</a></h2>
+      <div class="bibtex-block">
+        <button class="button is-small is-link copy-btn" onclick="copyToClipboard()">Copy</button>
+        <pre><code id="code-snippet">@inproceedings{li2026palmr,
+  title     = {PaLMR: Towards Faithful Visual Reasoning via Multimodal Process Alignment},
+  author    = {Yantao Li and Qiang Hui and Chenyang Yan and Kanzhi Cheng and Fang Zhao and Chao Tan and Huanling Gao and Jianbing Zhang and Kai Wang and Xinyu Dai and Shiguo Lian},
+  booktitle = {CVPR 2026 Findings},
+  year      = {2026},
+  url       = {https://arxiv.org/abs/2603.06652},
+  doi       = {10.48550/arXiv.2603.06652}
+}</code></pre>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="content has-text-centered">
+        <p>
+          Website template adapted from the project-page style used by MeanCache.
+        </p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
